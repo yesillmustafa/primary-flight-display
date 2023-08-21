@@ -12,8 +12,6 @@
 float circleYPositions = 0.0f;
 float circleRotations = 0.0f;
 
-//deneme 2
-
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods) {
     if (action == GLFW_PRESS || action == GLFW_REPEAT) {
         switch (key) {
