@@ -18,6 +18,7 @@ set(PROJECT_SOURCES
 
 set(PROJECT_HEADERS
                 ${PROJECT_INCLUDE_DIR}/shaderProgram.hpp
+                ${PROJECT_INCLUDE_DIR}/VertexTypes.hpp
                 ${PROJECT_INCLUDE_DIR}/landscape.hpp
                 ${PROJECT_INCLUDE_DIR}/AttitudeIndicator.hpp
                 ${PROJECT_INCLUDE_DIR}/aircraft.hpp
