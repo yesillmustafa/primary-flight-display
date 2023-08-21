@@ -8,7 +8,7 @@
 #include "AttitudeIndicator.hpp"
 #include "aircraft.hpp"
 
-
+//constants for moving
 float circleYPositions = 0.0f;
 float circleRotations = 0.0f;
 
