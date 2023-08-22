@@ -18,103 +18,21 @@ AttitudeIndicator::AttitudeIndicator() {
     createArcScaleLines();
     createArc();
     createArcTriangle();
+    createBankAngle();
+    createSlipSkidIndicator();
 
 }
 
-void AttitudeIndicator::Draw(float circleYPositions, float circleRotations) {
+void AttitudeIndicator::Draw(float circleYPositions, float circleRotations, float slipskid) {
     program.use();
 
-    // Yatay çizgi çizimi
-
-    glBindBuffer(GL_ARRAY_BUFFER, horizontalLines_VertexBuffer);
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, horizontalLines_IndexBuffer);
-
-    glm::mat4 model = glm::mat4(1.0f);
-    model = glm::translate(model, glm::vec3(0.0f, 0.2f, 0.0f));
-    model = glm::rotate(model,glm::radians(circleRotations), glm::vec3(0.0f,0.0f,1.0f));
-    model = glm::translate(model,glm::vec3(0.0f,circleYPositions, 0.0f));
-
-    GLuint modelLoc = glGetUniformLocation(program.getProgramId(),"model");
-    GLint posAttrib = glGetAttribLocation(program.getProgramId(), "position");
-    GLint colorUniform = glGetUniformLocation(program.getProgramId(), "color");
-
-    glUniformMatrix4fv(modelLoc,1,GL_FALSE,glm::value_ptr(model));
-    glEnableVertexAttribArray(posAttrib);
-    glVertexAttribPointer(posAttrib, 3, GL_FLOAT, GL_FALSE, 0, 0);
-    glUniform3f(colorUniform, 1.0f, 1.0f, 1.0f);
-
-    glDrawElements(GL_LINES, horizontalLines_IndexCount, GL_UNSIGNED_INT, 0);
-
-    glDisableVertexAttribArray(posAttrib);
-
-    // Yay üzerindeki ölçek çizgilerin çizimi
-
-    glBindBuffer(GL_ARRAY_BUFFER, arcScaleLines_VertexBuffer);
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, arcScaleLines_IndexBuffer);
-
-    glm::mat4 scaleModel = glm::mat4(1.0f);
-    scaleModel = glm::translate(scaleModel, glm::vec3(0.0f, 0.2f, 0.0f));
-    scaleModel = glm::rotate(scaleModel,glm::radians(circleRotations), glm::vec3(0.0f,0.0f,1.0f));
-
-    GLuint scaleModelLoc = glGetUniformLocation(program.getProgramId(),"model");
-    GLint scalePosAttrib = glGetAttribLocation(program.getProgramId(), "position");
-    GLint scaleColorUniform = glGetUniformLocation(program.getProgramId(), "color");
-
-    glUniformMatrix4fv(scaleModelLoc,1,GL_FALSE,glm::value_ptr(scaleModel));
-    glEnableVertexAttribArray(scalePosAttrib);
-    glVertexAttribPointer(scalePosAttrib, 3, GL_FLOAT, GL_FALSE, 0, 0);
-    glUniform3f(scaleColorUniform, 1.0f, 1.0f, 1.0f);
-
-    glDrawElements(GL_LINES, arcScaleLines_IndexCount, GL_UNSIGNED_INT, 0);
-
-    glDisableVertexAttribArray(scalePosAttrib);
-
-
-    //  Çember yayı çizimi
+    drawHorizontalLines(circleYPositions,circleRotations);
+    drawArcScaleLines(circleYPositions,circleRotations);
+    drawArc(circleYPositions, circleRotations);
+    drawArcTriangle(circleYPositions,circleRotations);
+    drawBankAngle(circleYPositions,circleRotations);
+    drawSlipSkidIndicator(circleYPositions,circleRotations,slipskid);
     
-    glBindBuffer(GL_ARRAY_BUFFER, arc_VertexBuffer);
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, arc_IndexBuffer);
-
-    glm::mat4 arcModel = glm::mat4(1.0f);
-    arcModel = glm::translate(arcModel, glm::vec3(0.0f, 0.2f, 0.0f)); //çemberin konumu
-    arcModel = glm::rotate(arcModel,glm::radians(circleRotations), glm::vec3(0.0f,0.0f,1.0f));
-
-    GLuint arcModelLoc = glGetUniformLocation(program.getProgramId(), "model");
-    GLint arcPosAttrib = glGetAttribLocation(program.getProgramId(), "position");
-    GLint arcColorUniform = glGetUniformLocation(program.getProgramId(), "color");
-
-    glUniformMatrix4fv(arcModelLoc, 1, GL_FALSE, glm::value_ptr(arcModel));
-    glEnableVertexAttribArray(arcPosAttrib);
-    glVertexAttribPointer(arcPosAttrib, 3, GL_FLOAT, GL_FALSE, 0, 0);
-    glUniform3f(arcColorUniform, 1.0f, 1.0f, 1.0f);
-
-    glDrawElements(GL_LINE_STRIP, arc_IndexCount, GL_UNSIGNED_INT, 0);
-
-    glDisableVertexAttribArray(arcPosAttrib);
-
-    //  Yaydaki Üçgenin çizimi
-    
-    glBindBuffer(GL_ARRAY_BUFFER, arcTriangle_VertexBuffer);
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, arcTriangle_IndexBuffer);
-
-    glm::mat4 arcTriModel = glm::mat4(1.0f);
-    arcTriModel = glm::translate(arcTriModel, glm::vec3(0.0f, 0.2f, 0.0f)); //çemberin konumu
-    arcTriModel = glm::rotate(arcTriModel,glm::radians(circleRotations), glm::vec3(0.0f,0.0f,1.0f));
-
-    GLuint arcTriModelLoc = glGetUniformLocation(program.getProgramId(), "model");
-    GLint arcTriPosAttrib = glGetAttribLocation(program.getProgramId(), "position");
-    GLint arcTriColorUniform = glGetUniformLocation(program.getProgramId(), "color");
-
-    glUniformMatrix4fv(arcTriModelLoc, 1, GL_FALSE, glm::value_ptr(arcTriModel));
-    glEnableVertexAttribArray(arcTriPosAttrib);
-    glVertexAttribPointer(arcTriPosAttrib, 3, GL_FLOAT, GL_FALSE, 0, 0);
-    glUniform3f(arcTriColorUniform, 1.0f, 1.0f, 1.0f);
-
-    glDrawElements(GL_TRIANGLES, arcTriangle_IndexCount, GL_UNSIGNED_INT, 0);
-
-    glDisableVertexAttribArray(arcTriPosAttrib);
-
-
     glUseProgram(0);
 }
 
@@ -305,4 +223,222 @@ void AttitudeIndicator::createArcTriangle()
     glGenBuffers(1, &arcTriangle_IndexBuffer);
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, arcTriangle_IndexBuffer);
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(unsigned int) * arcTri_Indices.size(), &arcTri_Indices[0], GL_STATIC_DRAW);
+}
+
+void AttitudeIndicator::createBankAngle()
+{
+    Vertex3List bankAngle_Vertices;
+    IndexList bankAngle_Indices;
+
+    Vertex3 bankAngleVertex;
+
+    float radius = 0.60f;
+    float innerRadius = 0.55f;
+
+    glm::vec3 triangleVertices[] = {
+        glm::vec3(radius*cos(glm::radians(90.0f)),radius*sin(glm::radians(90.0f)),0.0f),
+        glm::vec3(innerRadius*cos(glm::radians(92.5f)),innerRadius*sin(glm::radians(92.5f)),0.0f),
+        glm::vec3(innerRadius*cos(glm::radians(87.5f)),innerRadius*sin(glm::radians(87.5f)),0.0f)
+    };
+
+    for(int i=0; i<3; i++)
+    {
+        bankAngleVertex.pos = triangleVertices[i];
+        bankAngle_Vertices.push_back(bankAngleVertex);
+        bankAngle_Indices.push_back(i);
+    }
+
+    bankAngle_IndexCount = bankAngle_Indices.size();
+
+    glGenBuffers(1, &bankAngle_VertexBuffer);
+    glBindBuffer(GL_ARRAY_BUFFER, bankAngle_VertexBuffer);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(Vertex3) * bankAngle_Vertices.size(), &bankAngle_Vertices[0], GL_STATIC_DRAW);
+
+    glGenBuffers(1, &bankAngle_IndexBuffer);
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, bankAngle_IndexBuffer);
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(unsigned int) * bankAngle_Indices.size(), &bankAngle_Indices[0], GL_STATIC_DRAW);
+}
+
+void AttitudeIndicator::createSlipSkidIndicator()
+{
+    Vertex3List slipSkid_Vertices;
+    IndexList slipSkid_Indices;
+
+    Vertex3 slipSkidVertex;
+
+    float radius = 0.54f;
+    float innerRadius = 0.525f;
+
+    glm::vec3 triangleVertices[] = {
+        glm::vec3(radius*cos(glm::radians(92.5f)),radius*sin(glm::radians(92.5f)),0.0f),
+        glm::vec3(radius*cos(glm::radians(87.5f)),radius*sin(glm::radians(87.5f)),0.0f),
+        glm::vec3(innerRadius*cos(glm::radians(92.5f)),innerRadius*sin(glm::radians(92.5f)),0.0f),
+        glm::vec3(innerRadius*cos(glm::radians(87.5f)),innerRadius*sin(glm::radians(87.5f)),0.0f)
+    };
+
+    for(int i=0; i<4; i++)
+    {
+        slipSkidVertex.pos = triangleVertices[i];
+        slipSkid_Vertices.push_back(slipSkidVertex);
+        slipSkid_Indices.push_back(i);
+    }
+
+    slipSkid_IndexCount = slipSkid_Indices.size();
+
+    glGenBuffers(1, &slipSkid_VertexBuffer);
+    glBindBuffer(GL_ARRAY_BUFFER, slipSkid_VertexBuffer);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(Vertex3) * slipSkid_Vertices.size(), &slipSkid_Vertices[0], GL_STATIC_DRAW);
+
+    glGenBuffers(1, &slipSkid_IndexBuffer);
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, slipSkid_IndexBuffer);
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(unsigned int) * slipSkid_Indices.size(), &slipSkid_Indices[0], GL_STATIC_DRAW);
+}
+
+void AttitudeIndicator::drawHorizontalLines(float circleYPositions, float circleRotations)
+{
+    // Yatay çizgi çizimi
+
+    glBindBuffer(GL_ARRAY_BUFFER, horizontalLines_VertexBuffer);
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, horizontalLines_IndexBuffer);
+
+    glm::mat4 model = glm::mat4(1.0f);
+    model = glm::translate(model, glm::vec3(0.0f, 0.2f, 0.0f));
+    model = glm::rotate(model,glm::radians(circleRotations), glm::vec3(0.0f,0.0f,1.0f));
+    model = glm::translate(model,glm::vec3(0.0f,circleYPositions, 0.0f));
+
+    GLuint modelLoc = glGetUniformLocation(program.getProgramId(),"model");
+    GLint posAttrib = glGetAttribLocation(program.getProgramId(), "position");
+    GLint colorUniform = glGetUniformLocation(program.getProgramId(), "color");
+
+    glUniformMatrix4fv(modelLoc,1,GL_FALSE,glm::value_ptr(model));
+    glEnableVertexAttribArray(posAttrib);
+    glVertexAttribPointer(posAttrib, 3, GL_FLOAT, GL_FALSE, 0, 0);
+    glUniform3f(colorUniform, 1.0f, 1.0f, 1.0f);
+
+    glDrawElements(GL_LINES, horizontalLines_IndexCount, GL_UNSIGNED_INT, 0);
+
+    glDisableVertexAttribArray(posAttrib);
+}
+
+void AttitudeIndicator::drawArcScaleLines(float circleYPositions, float circleRotations)
+{
+    // Yay üzerindeki ölçek çizgilerin çizimi
+
+    glBindBuffer(GL_ARRAY_BUFFER, arcScaleLines_VertexBuffer);
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, arcScaleLines_IndexBuffer);
+
+    glm::mat4 scaleModel = glm::mat4(1.0f);
+    scaleModel = glm::translate(scaleModel, glm::vec3(0.0f, 0.2f, 0.0f));
+    scaleModel = glm::rotate(scaleModel,glm::radians(circleRotations), glm::vec3(0.0f,0.0f,1.0f));
+
+    GLuint scaleModelLoc = glGetUniformLocation(program.getProgramId(),"model");
+    GLint scalePosAttrib = glGetAttribLocation(program.getProgramId(), "position");
+    GLint scaleColorUniform = glGetUniformLocation(program.getProgramId(), "color");
+
+    glUniformMatrix4fv(scaleModelLoc,1,GL_FALSE,glm::value_ptr(scaleModel));
+    glEnableVertexAttribArray(scalePosAttrib);
+    glVertexAttribPointer(scalePosAttrib, 3, GL_FLOAT, GL_FALSE, 0, 0);
+    glUniform3f(scaleColorUniform, 1.0f, 1.0f, 1.0f);
+
+    glDrawElements(GL_LINES, arcScaleLines_IndexCount, GL_UNSIGNED_INT, 0);
+
+    glDisableVertexAttribArray(scalePosAttrib);
+}
+
+void AttitudeIndicator::drawArc(float circleYPositions, float circleRotations)
+{
+    //  Çember yayı çizimi
+    
+    glBindBuffer(GL_ARRAY_BUFFER, arc_VertexBuffer);
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, arc_IndexBuffer);
+
+    glm::mat4 arcModel = glm::mat4(1.0f);
+    arcModel = glm::translate(arcModel, glm::vec3(0.0f, 0.2f, 0.0f)); //çemberin konumu
+    arcModel = glm::rotate(arcModel,glm::radians(circleRotations), glm::vec3(0.0f,0.0f,1.0f));
+
+    GLuint arcModelLoc = glGetUniformLocation(program.getProgramId(), "model");
+    GLint arcPosAttrib = glGetAttribLocation(program.getProgramId(), "position");
+    GLint arcColorUniform = glGetUniformLocation(program.getProgramId(), "color");
+
+    glUniformMatrix4fv(arcModelLoc, 1, GL_FALSE, glm::value_ptr(arcModel));
+    glEnableVertexAttribArray(arcPosAttrib);
+    glVertexAttribPointer(arcPosAttrib, 3, GL_FLOAT, GL_FALSE, 0, 0);
+    glUniform3f(arcColorUniform, 1.0f, 1.0f, 1.0f);
+
+    glDrawElements(GL_LINE_STRIP, arc_IndexCount, GL_UNSIGNED_INT, 0);
+
+    glDisableVertexAttribArray(arcPosAttrib);
+}
+
+void AttitudeIndicator::drawArcTriangle(float circleYPositions, float circleRotations)
+{
+    //  Yaydaki Üçgenin çizimi
+    
+    glBindBuffer(GL_ARRAY_BUFFER, arcTriangle_VertexBuffer);
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, arcTriangle_IndexBuffer);
+
+    glm::mat4 arcTriModel = glm::mat4(1.0f);
+    arcTriModel = glm::translate(arcTriModel, glm::vec3(0.0f, 0.2f, 0.0f)); //çemberin konumu
+    arcTriModel = glm::rotate(arcTriModel,glm::radians(circleRotations), glm::vec3(0.0f,0.0f,1.0f));
+
+    GLuint arcTriModelLoc = glGetUniformLocation(program.getProgramId(), "model");
+    GLint arcTriPosAttrib = glGetAttribLocation(program.getProgramId(), "position");
+    GLint arcTriColorUniform = glGetUniformLocation(program.getProgramId(), "color");
+
+    glUniformMatrix4fv(arcTriModelLoc, 1, GL_FALSE, glm::value_ptr(arcTriModel));
+    glEnableVertexAttribArray(arcTriPosAttrib);
+    glVertexAttribPointer(arcTriPosAttrib, 3, GL_FLOAT, GL_FALSE, 0, 0);
+    glUniform3f(arcTriColorUniform, 1.0f, 1.0f, 1.0f);
+
+    glDrawElements(GL_TRIANGLES, arcTriangle_IndexCount, GL_UNSIGNED_INT, 0);
+
+    glDisableVertexAttribArray(arcTriPosAttrib);
+}
+
+void AttitudeIndicator::drawBankAngle(float circleYPositions, float circleRotations)
+{
+    //  Yaydaki Üçgenin çizimi
+    
+    glBindBuffer(GL_ARRAY_BUFFER, bankAngle_VertexBuffer);
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, bankAngle_IndexBuffer);
+
+    glm::mat4 bankAngleModel = glm::mat4(1.0f);
+    bankAngleModel = glm::translate(bankAngleModel, glm::vec3(0.0f, 0.2f, 0.0f)); //çemberin konumu
+
+    GLuint bankAngleModelLoc = glGetUniformLocation(program.getProgramId(), "model");
+    GLint bankAnglePosAttrib = glGetAttribLocation(program.getProgramId(), "position");
+    GLint bankAngleColorUniform = glGetUniformLocation(program.getProgramId(), "color");
+
+    glUniformMatrix4fv(bankAngleModelLoc, 1, GL_FALSE, glm::value_ptr(bankAngleModel));
+    glEnableVertexAttribArray(bankAnglePosAttrib);
+    glVertexAttribPointer(bankAnglePosAttrib, 3, GL_FLOAT, GL_FALSE, 0, 0);
+    glUniform3f(bankAngleColorUniform, 1.0f, 1.0f, 1.0f);
+
+    glDrawElements(GL_TRIANGLES, bankAngle_IndexCount, GL_UNSIGNED_INT, 0);
+
+    glDisableVertexAttribArray(bankAnglePosAttrib);
+}
+
+void AttitudeIndicator::drawSlipSkidIndicator(float circleYPositions, float circleRotations, float slipskid)
+{
+    //  Yaydaki Üçgenin çizimi
+    
+    glBindBuffer(GL_ARRAY_BUFFER, slipSkid_VertexBuffer);
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, slipSkid_IndexBuffer);
+
+    glm::mat4 slipSkidModel = glm::mat4(1.0f);
+    slipSkidModel = glm::translate(slipSkidModel, glm::vec3(0.0f, 0.2f, 0.0f)); //çemberin konumu
+    slipSkidModel = glm::translate(slipSkidModel,glm::vec3(slipskid,0.0f, 0.0f));
+    GLuint slipSkidModelLoc = glGetUniformLocation(program.getProgramId(), "model");
+    GLint slipSkidPosAttrib = glGetAttribLocation(program.getProgramId(), "position");
+    GLint slipSkidColorUniform = glGetUniformLocation(program.getProgramId(), "color");
+
+    glUniformMatrix4fv(slipSkidModelLoc, 1, GL_FALSE, glm::value_ptr(slipSkidModel));
+    glEnableVertexAttribArray(slipSkidPosAttrib);
+    glVertexAttribPointer(slipSkidPosAttrib, 3, GL_FLOAT, GL_FALSE, 0, 0);
+    glUniform3f(slipSkidColorUniform, 1.0f, 1.0f, 1.0f);
+
+    glDrawElements(GL_TRIANGLE_STRIP, slipSkid_IndexCount, GL_UNSIGNED_INT, 0);
+
+    glDisableVertexAttribArray(slipSkidPosAttrib);
 }

@@ -7,13 +7,23 @@
 class AttitudeIndicator {
 public:
     AttitudeIndicator();
-    void Draw(float circleYPositions, float circleRotations);
+    void Draw(float circleYPositions, float circleRotations, float slipskid);
 private:
 
     void createHorizontalLines();
     void createArcScaleLines();
     void createArc();
     void createArcTriangle();
+    void createBankAngle();
+    void createSlipSkidIndicator();
+
+    void drawHorizontalLines(float circleYPositions, float circleRotations);
+    void drawArcScaleLines(float circleYPositions, float circleRotations);
+    void drawArc(float circleYPositions, float circleRotations);
+    void drawArcTriangle(float circleYPositions, float circleRotations);
+    void drawBankAngle(float circleYPositions, float circleRotations);
+    void drawSlipSkidIndicator(float circleYPositions, float circleRotations, float slipskid);
+
 
     ShaderProgram program;
 
@@ -32,6 +42,14 @@ private:
     GLuint arcTriangle_VertexBuffer;
     GLuint arcTriangle_IndexBuffer;
     GLuint arcTriangle_IndexCount;
+
+    GLuint bankAngle_VertexBuffer;
+    GLuint bankAngle_IndexBuffer;
+    GLuint bankAngle_IndexCount;
+
+    GLuint slipSkid_VertexBuffer;
+    GLuint slipSkid_IndexBuffer;
+    GLuint slipSkid_IndexCount;
 };
 
 #endif // AI_HPP
