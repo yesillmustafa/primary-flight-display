@@ -13,6 +13,7 @@ set(PROJECT_SOURCES
                 ${PROJECT_SOURCE_DIR}/landscape.cpp
                 ${PROJECT_SOURCE_DIR}/AttitudeIndicator.cpp
                 ${PROJECT_SOURCE_DIR}/aircraft.cpp
+                ${PROJECT_SOURCE_DIR}/altimeter.cpp
                 )
 
 
@@ -22,6 +23,7 @@ set(PROJECT_HEADERS
                 ${PROJECT_INCLUDE_DIR}/landscape.hpp
                 ${PROJECT_INCLUDE_DIR}/AttitudeIndicator.hpp
                 ${PROJECT_INCLUDE_DIR}/aircraft.hpp
+                ${PROJECT_INCLUDE_DIR}/altimeter.hpp
                 )
 
 
@@ -33,4 +35,7 @@ include_directories(${PROJECT_INCLUDE_DIR})
 
 add_executable(${PROJECT_NAME} ${PROJECT_SOURCES})
 
-target_link_libraries(${PROJECT_NAME} glfw GLESv2)
+target_link_libraries(${PROJECT_NAME} glfw GLESv2 )
+
+
+
