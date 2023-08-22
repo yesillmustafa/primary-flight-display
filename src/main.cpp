@@ -56,7 +56,7 @@ int main() {
         glfwTerminate();
         return -1;
     }
-
+//
     // OpenGL bağlamını ayarla
     glfwMakeContextCurrent(window);
 
