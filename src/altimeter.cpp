@@ -35,7 +35,7 @@ GLuint indices[] = {
     0, 1, 2, // İlk üçgen
     1, 2, 3, // İkinci üçgen
     4, 5, 6, // Üçüncü üçgen
-    5, 6, 7  // Dördüncü üçgen
+   5, 6, 7  // Dördüncü üçgen
 };
 
 
@@ -71,7 +71,7 @@ void Altimeter::Draw() {
 
     glUniform1i(textureUniform, 0); // Assuming texture unit 0
 
-    glActiveTexture(GL_TEXTURE1);
+    glActiveTexture(GL_TEXTURE0);
     glBindTexture(GL_TEXTURE_2D, textureid); // Bind the loaded texture
 
     glDrawElements(GL_TRIANGLES,12, GL_UNSIGNED_INT, 0);

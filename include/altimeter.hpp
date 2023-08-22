@@ -13,7 +13,7 @@ private:
     GLuint vertexBuffer;
     GLuint indexBuffer;
     GLuint textureid;
-
+    GLuint texCoordBuffer;
 };
 
 #endif 
