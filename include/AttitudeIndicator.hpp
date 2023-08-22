@@ -24,7 +24,6 @@ private:
     void drawBankAngle(float circleYPositions, float circleRotations);
     void drawSlipSkidIndicator(float circleYPositions, float circleRotations, float slipskid);
 
-
     ShaderProgram program;
 
     GLuint horizontalLines_VertexBuffer;
@@ -50,6 +49,7 @@ private:
     GLuint slipSkid_VertexBuffer;
     GLuint slipSkid_IndexBuffer;
     GLuint slipSkid_IndexCount;
+
 };
 
 #endif // AI_HPP
