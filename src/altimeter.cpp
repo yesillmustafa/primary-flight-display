@@ -11,18 +11,18 @@ Altimeter::Altimeter() {
     program.link();
 
 
-GLfloat vertices[] = {
-    // Position (X, Y, Z)    Texture Coordinates (S, T)
-    0.8f,  0.6f, 0.0f,     -1.0f, -1.0f,
-    0.6f,  0.6f, 0.0f,     0.0f, -1.0f,
-    0.8f, -0.4f, 0.0f,     -1.0f, 0.0f,
-    0.6f, -0.4f, 0.0f,     0.0f, 0.0f,
+    GLfloat vertices[] = {
+        // Position (X, Y, Z)    Texture Coordinates (S, T)
+        0.8f,  0.6f, 0.0f,     -1.0f, -1.0f,
+        0.6f,  0.6f, 0.0f,     0.0f, -1.0f,
+        0.8f, -0.4f, 0.0f,     -1.0f, 0.0f,
+        0.6f, -0.4f, 0.0f,     0.0f, 0.0f,
 
-    -0.8f,  0.6f, 0.0f,    -1.0f, -1.0f,
-    -0.6f,  0.6f, 0.0f,    0.0f, -1.0f,
-    -0.8f, -0.4f, 0.0f,    -1.0f, 0.0f,
-    -0.6f, -0.4f, 0.0f,    0.0f, 0.0f,
-};
+        -0.8f,  0.6f, 0.0f,    -1.0f, -1.0f,
+        -0.6f,  0.6f, 0.0f,    0.0f, -1.0f,
+        -0.8f, -0.4f, 0.0f,    -1.0f, 0.0f,
+        -0.6f, -0.4f, 0.0f,    0.0f, 0.0f,
+    };
 
 
 
@@ -31,12 +31,12 @@ GLfloat vertices[] = {
     glBindBuffer(GL_ARRAY_BUFFER, vertexBuffer);
     glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
 
-GLuint indices[] = {
-    0, 1, 2, // İlk üçgen
-    1, 2, 3, // İkinci üçgen
-    4, 5, 6, // Üçüncü üçgen
-   5, 6, 7  // Dördüncü üçgen
-};
+    GLuint indices[] = {
+        0, 1, 2, // İlk üçgen
+        1, 2, 3, // İkinci üçgen
+        4, 5, 6, // Üçüncü üçgen
+        5, 6, 7  // Dördüncü üçgen
+    };
 
 
 
@@ -44,7 +44,7 @@ GLuint indices[] = {
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, indexBuffer);
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
 
-     texture tex;
+    texture tex;
     textureid=tex.settextureinner();
 
 
@@ -52,7 +52,7 @@ GLuint indices[] = {
 }
 
 void Altimeter::Draw() {
-   program.use();
+    program.use();
     glBindBuffer(GL_ARRAY_BUFFER, vertexBuffer);
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, indexBuffer);
 
