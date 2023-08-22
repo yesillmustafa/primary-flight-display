@@ -11,6 +11,7 @@
 
 float circleYPositions = 0.0f;
 float circleRotations = 0.0f;
+float slipSkidAmount = 0.0f;
 
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods) {
     if (action == GLFW_PRESS || action == GLFW_REPEAT) {
@@ -28,10 +29,16 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
                 
                 break;
             case GLFW_KEY_Q:
-                circleRotations += 0.4f;
+                circleRotations -= 0.5f;
                 break;
             case GLFW_KEY_E:
-                circleRotations -= 0.4f;
+                circleRotations += 0.5f;
+                break;
+            case GLFW_KEY_Z:
+                slipSkidAmount -= 0.001f;
+                break;
+            case GLFW_KEY_X:
+               slipSkidAmount += 0.001f;
                 break;
            
             default:
@@ -75,7 +82,7 @@ int main() {
         glClear(GL_COLOR_BUFFER_BIT);
 
         landscape.Draw(circleYPositions, circleRotations);
-        ai.Draw(circleYPositions, circleRotations);
+        ai.Draw(circleYPositions, circleRotations, slipSkidAmount);
         aircraft.Draw();
 
         // Pencere ön yüzeyini güncelle
