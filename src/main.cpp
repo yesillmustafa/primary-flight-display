@@ -1,13 +1,11 @@
 #include <GLFW/glfw3.h>
 #include <GLES2/gl2.h>
-
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
-
 #include "landscape.hpp"
 #include "AttitudeIndicator.hpp"
 #include "aircraft.hpp"
-
+#include "altimeter.hpp"
 //constants for moving
 float circleYPositions = 0.0f;
 float circleRotations = 0.0f;
@@ -67,6 +65,7 @@ int main() {
     Landscape landscape;
     AttitudeIndicator ai;
     Aircraft aircraft;
+    Altimeter alti;
 
     // Sonsuz döngüyü başlat
     while (!glfwWindowShouldClose(window)) {
@@ -77,7 +76,7 @@ int main() {
         landscape.Draw(circleYPositions, circleRotations);
         ai.Draw(circleYPositions, circleRotations);
         aircraft.Draw();
-
+        alti.Draw();
         // Pencere ön yüzeyini güncelle
         glfwSwapBuffers(window);
 
