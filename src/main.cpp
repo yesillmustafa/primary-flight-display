@@ -11,7 +11,7 @@
 float circleYPositions = 0.0f;
 float circleRotations = 0.0f;
 float slipSkidAmount = 0.0f;
-
+float YPositions = 0.0f;
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods) {
     if (action == GLFW_PRESS || action == GLFW_REPEAT) {
         switch (key) {
@@ -21,11 +21,11 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
             case GLFW_KEY_S:
                circleYPositions += 0.01f;
                 break;
-             case GLFW_KEY_A:
-                
+             case GLFW_KEY_8:
+                YPositions+=0.01f;
                 break;
-            case GLFW_KEY_D:
-                
+            case GLFW_KEY_2:
+                 YPositions-=0.01f;
                 break;
             case GLFW_KEY_Q:
                 circleRotations -= 0.5f;
@@ -85,13 +85,14 @@ int main() {
         landscape.Draw(circleYPositions, circleRotations);
         ai.Draw(circleYPositions, circleRotations, slipSkidAmount);
         aircraft.Draw();
-        alti.Draw();
+        //alti.Draw();
         //blend for texture transparency
         glEnable(GL_BLEND);
 
         glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+        alti.Draw();
          alti.Draw_ui();
-       // alti.Draw();
+        // alti.Draw();
         glDisable(GL_BLEND);
         
 
