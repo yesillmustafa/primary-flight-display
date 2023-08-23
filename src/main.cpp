@@ -6,6 +6,7 @@
 #include "AttitudeIndicator.hpp"
 #include "aircraft.hpp"
 #include "altimeter.hpp"
+
 //constants for moving
 float circleYPositions = 0.0f;
 float circleRotations = 0.0f;
@@ -58,7 +59,7 @@ int main() {
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 0);
 
     // Pencere oluştur
-    GLFWwindow* window = glfwCreateWindow(800, 800, "PFD Screen", NULL, NULL);
+    GLFWwindow* window = glfwCreateWindow(1000, 1000, "PFD Screen", NULL, NULL);
     if (!window) {
         glfwTerminate();
         return -1;
@@ -74,6 +75,7 @@ int main() {
     Aircraft aircraft;
     Altimeter alti;
 
+
     // Sonsuz döngüyü başlat
     while (!glfwWindowShouldClose(window)) {
         // Renk tamponunu temizle (mavi)
@@ -83,16 +85,17 @@ int main() {
         landscape.Draw(circleYPositions, circleRotations);
         ai.Draw(circleYPositions, circleRotations, slipSkidAmount);
         aircraft.Draw();
-
+        alti.Draw();
         //blend for texture transparency
         glEnable(GL_BLEND);
 
         glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-
-        alti.Draw();
-        
+         alti.Draw_ui();
+       // alti.Draw();
         glDisable(GL_BLEND);
         
+
+
         // Pencere ön yüzeyini güncelle
         glfwSwapBuffers(window);
 
