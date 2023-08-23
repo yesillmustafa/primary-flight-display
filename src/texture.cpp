@@ -26,7 +26,7 @@ GLuint texture::settextureinner()
     // Replace this with your own texture loading code using stb_image.h
     int width, height, numChannels;
     unsigned char* data = stbi_load("../images/texture.png", &width, &height, &numChannels, 0);
-   std::cout<<data<<std::endl;
+   
     if (data)
     {
         GLenum format = GL_RGB;
@@ -59,7 +59,7 @@ GLuint texture::settextureouter()
 
     // Replace this with your own texture loading code using stb_image.h
     int width, height, numChannels;
-    unsigned char* data = stbi_load("altimeter.png", &width, &height, &numChannels, 0);
+    unsigned char* data = stbi_load("../images/ui.png", &width, &height, &numChannels, 0);
    
     if (data)
     {

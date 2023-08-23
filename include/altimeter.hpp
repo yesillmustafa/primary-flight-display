@@ -8,11 +8,15 @@ class Altimeter {
 public:
     Altimeter();
     void Draw();
+    void Draw_ui();
 private:
     ShaderProgram program;
     GLuint vertexBuffer;
     GLuint indexBuffer;
+     GLuint vertexBuffer_ui;
+    GLuint indexBuffer_ui;
     GLuint textureid;
+    GLuint textureid_ui;
     GLuint texCoordBuffer;
 };
 
