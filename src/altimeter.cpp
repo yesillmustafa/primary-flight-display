@@ -3,6 +3,7 @@
 #include <iostream>
 #include "texture.cpp"
 
+    float art=0.000;
 
 Altimeter::Altimeter() {
     //shaders just include texture
@@ -13,15 +14,17 @@ Altimeter::Altimeter() {
     float art=0.022;
     GLfloat vertices[] = {
         // Position (X, Y, Z)    Texture Coordinates (S, T)
-        0.85f,  0.71f, 0.0f,     1.0f, -1.0f,
-        0.57f,  0.71f, 0.0f,     0.0f, -1.0f,
-        0.85f, -0.51f, 0.0f,     1.0f, 0.0f,
-        0.57f, -0.51f, 0.0f,     0.0f, 0.0f,
 
-        -0.8f-(2*art),  0.7f+art, 0.0f,    -1.0f, -1.0f,
-        -0.6f+art,  0.7f+art, 0.0f,    0.0f, -1.0f,
-        -0.8f-(2*art), -0.5f-art, 0.0f,    -1.0f, 0.0f,
-        -0.6f+art, -0.5f-art, 0.0f,    0.0f, 0.0f,
+        0.85f,  1.32f, 0.0f,     1.0f, -1.0f,
+        0.57f, 1.32f, 0.0f,     0.0f, -1.0f,
+        0.85f, -1.32f, 0.0f,     1.0f, 0.0f,
+        0.57f, -1.32f, 0.0f,     0.0f, 0.0f,
+
+        -0.8f-(2*art),  1.32f, 0.0f,    -1.0f, -1.0f,
+        -0.6f+art,  1.32f, 0.0f,    0.0f, -1.0f,
+        -0.8f-(2*art), -1.32f, 0.0f,    -1.0f, 0.0f,
+        -0.6f+art, -1.32f, 0.0f,    0.0f, 0.0f,
+
     };
 
 
@@ -84,6 +87,7 @@ void Altimeter::Draw() {
     program.use();
     glBindBuffer(GL_ARRAY_BUFFER, vertexBuffer);
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, indexBuffer);
+    
 
     // Get attribute and uniform locations
     GLint posAttrib = glGetAttribLocation(program.getProgramId(), "a_position");
