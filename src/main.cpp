@@ -85,18 +85,17 @@ int main() {
         landscape.Draw(circleYPositions, circleRotations);
         ai.Draw(circleYPositions, circleRotations, slipSkidAmount);
         aircraft.Draw();
-        //alti.Draw();
         //blend for texture transparency
         glEnable(GL_BLEND);
 
         glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+      
         alti.Draw();
-         alti.Draw_ui();
+        alti.Draw_ui();
         // alti.Draw();
+
         glDisable(GL_BLEND);
         
-
-
         // Pencere ön yüzeyini güncelle
         glfwSwapBuffers(window);
 

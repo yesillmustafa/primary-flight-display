@@ -14,6 +14,7 @@ Altimeter::Altimeter() {
     float art=0.022;
     GLfloat vertices[] = {
         // Position (X, Y, Z)    Texture Coordinates (S, T)
+
         0.85f,  1.32f, 0.0f,     1.0f, -1.0f,
         0.57f, 1.32f, 0.0f,     0.0f, -1.0f,
         0.85f, -1.32f, 0.0f,     1.0f, 0.0f,
@@ -23,6 +24,7 @@ Altimeter::Altimeter() {
         -0.6f+art,  1.32f, 0.0f,    0.0f, -1.0f,
         -0.8f-(2*art), -1.32f, 0.0f,    -1.0f, 0.0f,
         -0.6f+art, -1.32f, 0.0f,    0.0f, 0.0f,
+
     };
 
 
