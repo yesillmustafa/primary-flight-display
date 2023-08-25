@@ -6,6 +6,7 @@
 #include "AttitudeIndicator.hpp"
 #include "aircraft.hpp"
 #include "altimeter.hpp"
+#include "UserInterface.hpp"
 #include <iostream>
 //constants for moving
 float circleYPositions = 0.0f;
@@ -75,6 +76,8 @@ int main() {
     AttitudeIndicator ai;
     Aircraft aircraft;
     Altimeter alti;
+    UserInterface ui;
+
 
 
     // Sonsuz döngüyü başlat
@@ -91,8 +94,8 @@ int main() {
 
         glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
       
-        alti.Draw_ui();
         alti.Draw(YPositions);
+        ui.Draw();
         ai.Draw(circleYPositions, circleRotations, slipSkidAmount);
         glDisable(GL_BLEND);
         
