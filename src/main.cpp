@@ -6,6 +6,7 @@
 #include "AttitudeIndicator.hpp"
 #include "aircraft.hpp"
 #include "altimeter.hpp"
+#include "SpeedIndicator.hpp"
 #include "UserInterface.hpp"
 #include <iostream>
 //constants for moving
@@ -76,6 +77,7 @@ int main() {
     AttitudeIndicator ai;
     Aircraft aircraft;
     Altimeter alti;
+    SpeedIndicator speedindicator;
     UserInterface ui;
 
 
@@ -89,15 +91,19 @@ int main() {
         landscape.Draw(circleYPositions, circleRotations);
         //ai.Draw(circleYPositions, circleRotations, slipSkidAmount);
         aircraft.Draw();
+        
+
         // //blend for texture transparency
         glEnable(GL_BLEND);
 
         glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
       
         alti.Draw(YPositions);
+        speedindicator.Draw(YPositions);
         ui.Draw();
-        ai.Draw(circleYPositions, circleRotations, slipSkidAmount);
         glDisable(GL_BLEND);
+
+        ai.Draw(circleYPositions, circleRotations, slipSkidAmount);
         
         // Pencere ön yüzeyini güncelle
         glfwSwapBuffers(window);
