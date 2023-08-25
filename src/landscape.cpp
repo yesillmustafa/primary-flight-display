@@ -11,13 +11,13 @@ Landscape::Landscape(){
     program.attachShader("../shaders/vs-landscape.glsl", GL_VERTEX_SHADER);
     program.attachShader("../shaders/fs-landscape.glsl", GL_FRAGMENT_SHADER);
     program.link();
-
+    const float height=0.3f;
     // Vertex verileri
     GLfloat vertices[] = {
-        -2.0f, 0.0f, 0.0f,
-        -2.0f, -2.0f, 0.0f,
-        2.0f, -2.0f, 0.0f,
-        2.0f, 0.0f, 0.0f,
+        -2.0f, 0.0f+height, 0.0f,
+        -2.0f, -2.0f+height, 0.0f,
+        2.0f, -2.0f+height, 0.0f,
+        2.0f, 0.0f+height, 0.0f,
     };
 
     glGenBuffers(1, &vertexBuffer);

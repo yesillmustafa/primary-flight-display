@@ -18,12 +18,12 @@ Altimeter::Altimeter() {
         0.85f,  1.32f, 0.0f,     1.0f, -1.0f,
         0.57f, 1.32f, 0.0f,     0.0f, -1.0f,
         0.85f, -1.32f, 0.0f,     1.0f, 0.0f,
-        0.57f, -1.32f, 0.0f,     0.0f, 0.0f,
+        0.57f, -1.32f, 0.0f,     0.0001f, 0.0001f, //vs allows bigger or lower than 0.0
 
         -0.8f-(2*art),  1.32f, 0.0f,    -1.0f, -1.0f,
         -0.6f+art,  1.32f, 0.0f,    0.0f, -1.0f,
         -0.8f-(2*art), -1.32f, 0.0f,    -1.0f, 0.0f,
-        -0.6f+art, -1.32f, 0.0f,    0.0f, 0.0f,
+        -0.6f+art, -1.32f, 0.0f,    0.0001f, 0.0001f,//vs allows bigger or lower than 0.0
 
     };
 
@@ -83,17 +83,14 @@ GLuint uiindices[] = {
 
 }
 
-void Altimeter::Draw() {
+void Altimeter::Draw(float yoffset) {
     program.use();
     glBindBuffer(GL_ARRAY_BUFFER, vertexBuffer);
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, indexBuffer);
-    
 
-    // Get attribute and uniform locations
     GLint posAttrib = glGetAttribLocation(program.getProgramId(), "a_position");
-    GLint texCoordAttrib = glGetAttribLocation(program.getProgramId(), "texCoord");
-
-    
+    GLint texCoordAttrib = glGetAttribLocation(program.getProgramId(), "texCoordy");
+    GLint yoffsetloc = glGetUniformLocation(program.getProgramId(), "modelYOffset");
     GLint textureUniform = glGetUniformLocation(program.getProgramId(), "textureSampler");
 
     glEnableVertexAttribArray(posAttrib);
@@ -101,21 +98,21 @@ void Altimeter::Draw() {
 
     glEnableVertexAttribArray(texCoordAttrib);
     glVertexAttribPointer(texCoordAttrib, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(GLfloat), (void*)(3 * sizeof(GLfloat)));
-
+    glUniform1f(yoffsetloc, yoffset);
     glUniform1i(textureUniform, 1); // Assuming texture unit 0
-
+     
+    
     glActiveTexture(GL_TEXTURE1);
-    glBindTexture(GL_TEXTURE_2D, textureid); // Bind the loaded texture
+    glBindTexture(GL_TEXTURE_2D, textureid);
 
-    glDrawElements(GL_TRIANGLES,12, GL_UNSIGNED_INT, 0);
+   
+
+    glDrawElements(GL_TRIANGLES, 12, GL_UNSIGNED_INT, 0);
 
     glDisableVertexAttribArray(posAttrib);
     glDisableVertexAttribArray(texCoordAttrib);
 
-
     glUseProgram(0);
-    
-   
 }
 
 
@@ -132,7 +129,7 @@ void Altimeter::Draw_ui(){
 
     
     GLint textureUniform_ui = glGetUniformLocation(program.getProgramId(), "textureSampler");
-
+    
     glEnableVertexAttribArray(posAttrib_ui);
     glVertexAttribPointer(posAttrib_ui, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(GLfloat), 0);
 
@@ -140,6 +137,7 @@ void Altimeter::Draw_ui(){
     glVertexAttribPointer(texCoordAttrib_ui, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(GLfloat), (void*)(3 * sizeof(GLfloat)));
 
     glUniform1i(textureUniform_ui, 0); // Assuming texture unit 0
+   
 
     glActiveTexture(GL_TEXTURE0);
     glBindTexture(GL_TEXTURE_2D, textureid_ui); // Bind the loaded texture

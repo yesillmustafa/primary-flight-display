@@ -7,7 +7,7 @@
 class Altimeter {
 public:
     Altimeter();
-    void Draw();
+    void Draw(float yoffset);
     void Draw_ui();
 private:
     ShaderProgram program;
