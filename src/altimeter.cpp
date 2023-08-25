@@ -1,14 +1,13 @@
 #include "altimeter.hpp"
 #include <GLES2/gl2.h>
 #include <iostream>
-// #include "texture.cpp"
 #include "TextureManager.hpp"
 
 
 Altimeter::Altimeter() {
     //shaders just include texture
-    program.attachShader("../shaders/vs-altimeter.glsl", GL_VERTEX_SHADER);
-    program.attachShader("../shaders/fs-altimeter.glsl", GL_FRAGMENT_SHADER);
+    program.attachShader("../shaders/vs-usetexture.glsl", GL_VERTEX_SHADER);
+    program.attachShader("../shaders/fs-usetexture.glsl", GL_FRAGMENT_SHADER);
     program.link();
 
     GLfloat vertices[] = {
@@ -45,42 +44,9 @@ Altimeter::Altimeter() {
     glGenBuffers(1, &indexBuffer);
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, indexBuffer);
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
-    // texture tex;
-    // textureid=tex.settextureinner();
+
+    //load texture
     altimeterTex = TextureManager::getInstance()->loadTexture("../images/qa.png");
-
- GLfloat uivertices[] = {
-    // Position (X, Y, Z)    Texture Coordinates (S, T)
-    1.0f,  1.0f, 0.0f,     0.0f, 0.0f,
-    -1.0f,  1.0f, 0.0f,    1.0f, 0.0f,
-    1.0f, -1.0f, 0.0f,     0.0f, 1.0f,
-    -1.0f, -1.0f, 0.0f,    1.0f, 1.0f,
-};
-
-
-
-
-
-    glGenBuffers(1, &vertexBuffer_ui);
-    glBindBuffer(GL_ARRAY_BUFFER, vertexBuffer_ui);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(uivertices), uivertices, GL_STATIC_DRAW);
-
-
-GLuint uiindices[] = {
-    0, 1, 2, // First triangle
-    1, 2, 3  // Second triangle
-};
-
-
-
-    glGenBuffers(1, &indexBuffer_ui);
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, indexBuffer_ui);
-    glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(uiindices), uiindices, GL_STATIC_DRAW);
-
-   
-    // textureid_ui=tex.settextureouter();
-    uiTex = TextureManager::getInstance()->loadTexture("../images/ui_layer.png");
-
 
 }
 
@@ -101,53 +67,14 @@ void Altimeter::Draw(float yoffset) {
     glVertexAttribPointer(texCoordAttrib, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(GLfloat), (void*)(3 * sizeof(GLfloat)));
     glUniform1f(yoffsetloc, yoffset);
     glUniform1i(textureUniform, 1); // Assuming texture unit 0
-     
-    
-    // glActiveTexture(GL_TEXTURE1);
-    // glBindTexture(GL_TEXTURE_2D, textureid);
-    TextureManager::getInstance()->activateTexture(GL_TEXTURE1,altimeterTex);
 
-   
+    //activate texture
+    TextureManager::getInstance()->activateTexture(GL_TEXTURE1,altimeterTex);
 
     glDrawElements(GL_TRIANGLES, 12, GL_UNSIGNED_INT, 0);
 
     glDisableVertexAttribArray(posAttrib);
     glDisableVertexAttribArray(texCoordAttrib);
 
-    glUseProgram(0);
-}
-
-
-void Altimeter::Draw_ui(){
-     program.use();
-    glBindBuffer(GL_ARRAY_BUFFER, vertexBuffer_ui);
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, indexBuffer_ui);
-
-    // Get attribute and uniform locations
-   
-    // Get attribute and uniform locations
-    GLint posAttrib_ui = glGetAttribLocation(program.getProgramId(), "a_position");
-    GLint texCoordAttrib_ui = glGetAttribLocation(program.getProgramId(), "texCoord");
-
-    
-    GLint textureUniform_ui = glGetUniformLocation(program.getProgramId(), "textureSampler");
-    
-    glEnableVertexAttribArray(posAttrib_ui);
-    glVertexAttribPointer(posAttrib_ui, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(GLfloat), 0);
-
-    glEnableVertexAttribArray(texCoordAttrib_ui);
-    glVertexAttribPointer(texCoordAttrib_ui, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(GLfloat), (void*)(3 * sizeof(GLfloat)));
-
-    glUniform1i(textureUniform_ui, 0); // Assuming texture unit 0
-   
-
-    // glActiveTexture(GL_TEXTURE0);
-    // glBindTexture(GL_TEXTURE_2D, textureid_ui); // Bind the loaded texture
-    TextureManager::getInstance()->activateTexture(GL_TEXTURE0,uiTex);
-
-    glDrawElements(GL_TRIANGLES,12, GL_UNSIGNED_INT, 0);
-
-    glDisableVertexAttribArray(posAttrib_ui);
-    glDisableVertexAttribArray(texCoordAttrib_ui);
     glUseProgram(0);
 }

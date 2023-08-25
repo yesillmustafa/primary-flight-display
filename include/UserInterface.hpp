@@ -1,19 +1,18 @@
-#ifndef ALTIMETER_HPP
-#define ALTIMETER_HPP
+#ifndef UI_HPP
+#define UI_HPP
 
 #include <GLES2/gl2.h>
 #include "shaderProgram.hpp"
 
-class Altimeter {
+class UserInterface {
 public:
-    Altimeter();
-    void Draw(float yoffset);
+    UserInterface();
+    void Draw();
 private:
     ShaderProgram program;
     GLuint vertexBuffer;
     GLuint indexBuffer;
-    GLuint altimeterTex;
-
+    GLuint uiTex;
 };
 
 #endif 
