@@ -86,13 +86,13 @@ int main() {
         landscape.Draw(circleYPositions, circleRotations);
         //ai.Draw(circleYPositions, circleRotations, slipSkidAmount);
         aircraft.Draw();
-        //blend for texture transparency
+        // //blend for texture transparency
         glEnable(GL_BLEND);
 
         glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
       
-        alti.Draw(YPositions);
         alti.Draw_ui();
+        alti.Draw(YPositions);
         ai.Draw(circleYPositions, circleRotations, slipSkidAmount);
         glDisable(GL_BLEND);
         
