@@ -1,10 +1,10 @@
-#include "altimeter.hpp"
+#include "SpeedIndicator.hpp"
 #include <GLES2/gl2.h>
 #include <iostream>
 #include "TextureManager.hpp"
 
 
-Altimeter::Altimeter() {
+SpeedIndicator::SpeedIndicator() {
     //shaders just include texture
     program.attachShader("../shaders/vs-usetexture.glsl", GL_VERTEX_SHADER);
     program.attachShader("../shaders/fs-usetexture.glsl", GL_FRAGMENT_SHADER);
@@ -13,10 +13,10 @@ Altimeter::Altimeter() {
     GLfloat vertices[] = {
         // Position (X, Y, Z)    Texture Coordinates (S, T)
 
-        0.775f,  0.9375f, 0.0f,     1.0f, -1.0f,
-        0.575f, 0.9375f, 0.0f,     0.0f, -1.0f,
-        0.775f, -0.1875f, 0.0f,     1.0f, 0.0f,
-        0.575f, -0.1875f, 0.0f,     0.0001f, 0.0001f, //vs allows bigger or lower than 0.0
+        -0.775f,  0.9375, 0.0f,    -1.0f, -1.0f,
+        -0.575f,  0.9375, 0.0f,    0.0f, -1.0f,
+        -0.775f, -0.1875f, 0.0f,    -1.0f, 0.0f,
+        -0.575f, -0.1875f, 0.0f,    0.0001f, 0.0001f,//vs allows bigger or lower than 0.0
 
     };
 
@@ -41,11 +41,11 @@ Altimeter::Altimeter() {
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
 
     //load texture
-    altimeterTex = TextureManager::getInstance()->loadTexture("../images/altimeter.png");
+    siTex = TextureManager::getInstance()->loadTexture("../images/speedindicator.png");
 
 }
 
-void Altimeter::Draw(float yoffset) {
+void SpeedIndicator::Draw(float yoffset) {
     program.use();
     glBindBuffer(GL_ARRAY_BUFFER, vertexBuffer);
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, indexBuffer);
@@ -64,7 +64,7 @@ void Altimeter::Draw(float yoffset) {
     glUniform1i(textureUniform, 1); // Assuming texture unit 0
 
     //activate texture
-    TextureManager::getInstance()->activateTexture(GL_TEXTURE1,altimeterTex);
+    TextureManager::getInstance()->activateTexture(GL_TEXTURE1,siTex);
 
     glDrawElements(GL_TRIANGLES, 12, GL_UNSIGNED_INT, 0);
 

@@ -16,6 +16,7 @@ set(PROJECT_SOURCES
                 ${PROJECT_SOURCE_DIR}/altimeter.cpp
                 ${PROJECT_SOURCE_DIR}/TextureManager.cpp
                 ${PROJECT_SOURCE_DIR}/UserInterface.cpp
+                ${PROJECT_SOURCE_DIR}/SpeedIndicator.cpp
                 )
 
 
@@ -29,6 +30,7 @@ set(PROJECT_HEADERS
                 ${PROJECT_INCLUDE_DIR}/TextureManager.hpp
                 ${PROJECT_INCLUDE_DIR}/stb_image.h
                 ${PROJECT_INCLUDE_DIR}/UserInterface.hpp
+                ${PROJECT_INCLUDE_DIR}/SpeedIndicator.hpp
                 )
 
 
