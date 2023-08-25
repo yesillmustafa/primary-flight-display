@@ -11,19 +11,18 @@ Altimeter::Altimeter() {
     program.attachShader("../shaders/fs-altimeter.glsl", GL_FRAGMENT_SHADER);
     program.link();
 
-    float art=0.022;
     GLfloat vertices[] = {
         // Position (X, Y, Z)    Texture Coordinates (S, T)
 
-        0.85f,  1.32f, 0.0f,     1.0f, -1.0f,
-        0.57f, 1.32f, 0.0f,     0.0f, -1.0f,
-        0.85f, -1.32f, 0.0f,     1.0f, 0.0f,
-        0.57f, -1.32f, 0.0f,     0.0001f, 0.0001f, //vs allows bigger or lower than 0.0
+        0.775f,  0.9375f, 0.0f,     1.0f, -1.0f,
+        0.575f, 0.9375f, 0.0f,     0.0f, -1.0f,
+        0.775f, -0.1875f, 0.0f,     1.0f, 0.0f,
+        0.575f, -0.1875f, 0.0f,     0.0001f, 0.0001f, //vs allows bigger or lower than 0.0
 
-        -0.8f-(2*art),  1.32f, 0.0f,    -1.0f, -1.0f,
-        -0.6f+art,  1.32f, 0.0f,    0.0f, -1.0f,
-        -0.8f-(2*art), -1.32f, 0.0f,    -1.0f, 0.0f,
-        -0.6f+art, -1.32f, 0.0f,    0.0001f, 0.0001f,//vs allows bigger or lower than 0.0
+        -0.775f,  0.9375, 0.0f,    -1.0f, -1.0f,
+        -0.575f,  0.9375, 0.0f,    0.0f, -1.0f,
+        -0.775f, -0.1875f, 0.0f,    -1.0f, 0.0f,
+        -0.575f, -0.1875f, 0.0f,    0.0001f, 0.0001f,//vs allows bigger or lower than 0.0
 
     };
 

@@ -10,9 +10,21 @@ public:
     void Draw(float circleYPositions, float circleRotations);
 
 private:
+
+    void createLines();
+    void createLandscape();
+
+    void drawLines(float circleYPositions, float circleRotations);
+    void drawLandscape(float circleYPositions, float circleRotations);
+
+
     ShaderProgram program;
     GLuint vertexBuffer;
     GLuint indexBuffer;
+
+    GLuint lines_VertexBuffer;
+    GLuint lines_IndexBuffer;
+    GLuint lines_IndexCount;
 };
 
 #endif // LANDSCAPE_HPP

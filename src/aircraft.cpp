@@ -9,7 +9,7 @@ Aircraft::Aircraft() {
     program.link();
 
     const float lineWidth = 0.16f;
-    const float height=0.3f;
+    const float height=0.2f;
     // Vertex verileri
     GLfloat vertices[] = {
         // Orta Gösterge

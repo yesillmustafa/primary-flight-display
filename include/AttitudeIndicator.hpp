@@ -10,14 +10,12 @@ public:
     void Draw(float circleYPositions, float circleRotations, float slipskid);
 private:
 
-    void createHorizontalLines();
     void createArcScaleLines();
     void createArc();
     void createArcTriangle();
     void createBankAngle();
     void createSlipSkidIndicator();
 
-    void drawHorizontalLines(float circleYPositions, float circleRotations);
     void drawArcScaleLines(float circleYPositions, float circleRotations);
     void drawArc(float circleYPositions, float circleRotations);
     void drawArcTriangle(float circleYPositions, float circleRotations);

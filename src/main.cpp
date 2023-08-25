@@ -60,7 +60,7 @@ int main() {
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 0);
 
     // Pencere oluştur
-    GLFWwindow* window = glfwCreateWindow(1000, 1000, "PFD Screen", NULL, NULL);
+    GLFWwindow* window = glfwCreateWindow(800, 800, "PFD Screen", NULL, NULL);
     if (!window) {
         glfwTerminate();
         return -1;

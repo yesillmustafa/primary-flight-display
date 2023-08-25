@@ -14,9 +14,8 @@ AttitudeIndicator::AttitudeIndicator() {
     program.attachShader("../shaders/fs-landscape.glsl", GL_FRAGMENT_SHADER);
     program.link();
 
-    createHorizontalLines();
     createArcScaleLines();
-    createArc();
+    //createArc();
     createArcTriangle();
     createBankAngle();
     createSlipSkidIndicator();
@@ -26,9 +25,8 @@ AttitudeIndicator::AttitudeIndicator() {
 void AttitudeIndicator::Draw(float circleYPositions, float circleRotations, float slipskid) {
     program.use();
 
-    drawHorizontalLines(circleYPositions,circleRotations);
     drawArcScaleLines(circleYPositions,circleRotations);
-    drawArc(circleYPositions, circleRotations);
+    //drawArc(circleYPositions, circleRotations);
     drawArcTriangle(circleYPositions,circleRotations);
     drawBankAngle(circleYPositions,circleRotations);
     drawSlipSkidIndicator(circleYPositions,circleRotations,slipskid);
@@ -36,64 +34,6 @@ void AttitudeIndicator::Draw(float circleYPositions, float circleRotations, floa
     glUseProgram(0);
 }
 
-void AttitudeIndicator::createHorizontalLines()
-{
-    const float gapValue = 0.08f;
-    const float lineWidth = 0.14f;
-
-    Vertex3List hl_Vertices;
-    IndexList hl_Indices;
-
-    Vertex3 vertex;
-
-    // Yatay Çizgi Vertex verileri
-    glm::vec3 horizontalLineVertices[] = {
-        glm::vec3(-2.0f, 0.3f, 0.0f),
-        glm::vec3(2.0f, 0.3f, 0.0f),
-
-        glm::vec3(-lineWidth/3, 0.3f + gapValue, 0.0f),
-        glm::vec3(lineWidth/3, 0.3f + gapValue, 0.0f),
-
-        glm::vec3(-lineWidth/3, 0.3f - gapValue, 0.0f),
-        glm::vec3(lineWidth/3, 0.3f - gapValue, 0.0f),
-
-        glm::vec3(-lineWidth, 0.3f + gapValue*2, 0.0f),
-        glm::vec3(lineWidth, 0.3f + gapValue*2, 0.0f),
-
-        glm::vec3(-lineWidth, 0.3f - gapValue*2, 0.0f),
-        glm::vec3(lineWidth, 0.3f - gapValue*2, 0.0f),
-
-        glm::vec3(-lineWidth/3, 0.3f + gapValue*3, 0.0f),
-        glm::vec3(lineWidth/3, 0.3f + gapValue*3, 0.0f),
-
-        glm::vec3(-lineWidth/3, 0.3f - gapValue*3, 0.0f),
-        glm::vec3(lineWidth/3, 0.3f - gapValue*3, 0.0f),
-
-        glm::vec3(-lineWidth, 0.3f + gapValue*4, 0.0f),
-        glm::vec3(lineWidth, 0.3f + gapValue*4, 0.0f),
-
-        glm::vec3(-lineWidth, 0.3f - gapValue*4, 0.0f),
-        glm::vec3(lineWidth, 0.3f - gapValue*4, 0.0f)
-
-    };
-
-    for(int i=0;i<sizeof(horizontalLineVertices) / sizeof(horizontalLineVertices[0]);i++)
-    {
-        vertex.pos = horizontalLineVertices[i];
-        hl_Vertices.push_back(vertex);
-        hl_Indices.push_back(i);
-    };
-
-    horizontalLines_IndexCount = hl_Indices.size();
-
-    glGenBuffers(1, &horizontalLines_VertexBuffer);
-    glBindBuffer(GL_ARRAY_BUFFER, horizontalLines_VertexBuffer);
-    glBufferData(GL_ARRAY_BUFFER,sizeof(Vertex3)*hl_Vertices.size(),&hl_Vertices[0],GL_STATIC_DRAW);
-
-    glGenBuffers(1, &horizontalLines_IndexBuffer);
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, horizontalLines_IndexBuffer);
-    glBufferData(GL_ELEMENT_ARRAY_BUFFER,sizeof(unsigned int)*hl_Indices.size(),&hl_Indices[0],GL_STATIC_DRAW);
-}
 
 void AttitudeIndicator::createArcScaleLines()
 {
@@ -104,40 +44,39 @@ void AttitudeIndicator::createArcScaleLines()
 
     Vertex3 scaleVertex;
 
-    float radius = 0.58f;
-    float innerRadius1 = 0.625f;
-    float innerRadius2 = 0.65f;
-    float height=0.17f;
+    float radius = 0.5f;
+    float innerRadius1 = 0.53f;
+    float innerRadius2 = 0.57f;
 glm::vec3 arcScaleVertices[] = {
-    glm::vec3(radius * cos(glm::radians(30.0f)), radius * sin(glm::radians(30.0f)) + height, 0.0f),
-    glm::vec3(innerRadius2 * cos(glm::radians(30.0f)), innerRadius2 * sin(glm::radians(30.0f)) + height, 0.0f),
+    glm::vec3(radius * cos(glm::radians(30.0f)), radius * sin(glm::radians(30.0f)) , 0.0f),
+    glm::vec3(innerRadius2 * cos(glm::radians(30.0f)), innerRadius2 * sin(glm::radians(30.0f)) , 0.0f),
 
-    glm::vec3(radius * cos(glm::radians(45.0f)), radius * sin(glm::radians(45.0f)) + height, 0.0f),
-    glm::vec3(innerRadius1 * cos(glm::radians(45.0f)), innerRadius1 * sin(glm::radians(45.0f)) + height, 0.0f),
+    glm::vec3(radius * cos(glm::radians(45.0f)), radius * sin(glm::radians(45.0f)) , 0.0f),
+    glm::vec3(innerRadius1 * cos(glm::radians(45.0f)), innerRadius1 * sin(glm::radians(45.0f)) , 0.0f),
 
-    glm::vec3(radius * cos(glm::radians(60.0f)), radius * sin(glm::radians(60.0f)) + height, 0.0f),
-    glm::vec3(innerRadius2 * cos(glm::radians(60.0f)), innerRadius2 * sin(glm::radians(60.0f)) + height, 0.0f),
+    glm::vec3(radius * cos(glm::radians(60.0f)), radius * sin(glm::radians(60.0f)) , 0.0f),
+    glm::vec3(innerRadius2 * cos(glm::radians(60.0f)), innerRadius2 * sin(glm::radians(60.0f)) , 0.0f),
 
-    glm::vec3(radius * cos(glm::radians(70.0f)), radius * sin(glm::radians(70.0f)) + height, 0.0f),
-    glm::vec3(innerRadius1 * cos(glm::radians(70.0f)), innerRadius1 * sin(glm::radians(70.0f)) + height, 0.0f),
+    glm::vec3(radius * cos(glm::radians(70.0f)), radius * sin(glm::radians(70.0f)) , 0.0f),
+    glm::vec3(innerRadius1 * cos(glm::radians(70.0f)), innerRadius1 * sin(glm::radians(70.0f)) , 0.0f),
 
-    glm::vec3(radius * cos(glm::radians(80.0f)), radius * sin(glm::radians(80.0f)) + height, 0.0f),
-    glm::vec3(innerRadius1 * cos(glm::radians(80.0f)), innerRadius1 * sin(glm::radians(80.0f)) + height, 0.0f),
+    glm::vec3(radius * cos(glm::radians(80.0f)), radius * sin(glm::radians(80.0f)) , 0.0f),
+    glm::vec3(innerRadius1 * cos(glm::radians(80.0f)), innerRadius1 * sin(glm::radians(80.0f)) , 0.0f),
 
-    glm::vec3(radius * cos(glm::radians(100.0f)), radius * sin(glm::radians(100.0f)) + height, 0.0f),
-    glm::vec3(innerRadius1 * cos(glm::radians(100.0f)), innerRadius1 * sin(glm::radians(100.0f)) + height, 0.0f),
+    glm::vec3(radius * cos(glm::radians(100.0f)), radius * sin(glm::radians(100.0f)) , 0.0f),
+    glm::vec3(innerRadius1 * cos(glm::radians(100.0f)), innerRadius1 * sin(glm::radians(100.0f)) , 0.0f),
 
-    glm::vec3(radius * cos(glm::radians(110.0f)), radius * sin(glm::radians(110.0f)) + height, 0.0f),
-    glm::vec3(innerRadius1 * cos(glm::radians(110.0f)), innerRadius1 * sin(glm::radians(110.0f)) + height, 0.0f),
+    glm::vec3(radius * cos(glm::radians(110.0f)), radius * sin(glm::radians(110.0f)) , 0.0f),
+    glm::vec3(innerRadius1 * cos(glm::radians(110.0f)), innerRadius1 * sin(glm::radians(110.0f)) , 0.0f),
 
-    glm::vec3(radius * cos(glm::radians(120.0f)), radius * sin(glm::radians(120.0f)) + height, 0.0f),
-    glm::vec3(innerRadius2 * cos(glm::radians(120.0f)), innerRadius2 * sin(glm::radians(120.0f)) + height, 0.0f),
+    glm::vec3(radius * cos(glm::radians(120.0f)), radius * sin(glm::radians(120.0f)) , 0.0f),
+    glm::vec3(innerRadius2 * cos(glm::radians(120.0f)), innerRadius2 * sin(glm::radians(120.0f)) , 0.0f),
 
-    glm::vec3(radius * cos(glm::radians(135.0f)), radius * sin(glm::radians(135.0f)) + height, 0.0f),
-    glm::vec3(innerRadius1 * cos(glm::radians(135.0f)), innerRadius1 * sin(glm::radians(135.0f)) + height, 0.0f),
+    glm::vec3(radius * cos(glm::radians(135.0f)), radius * sin(glm::radians(135.0f)) , 0.0f),
+    glm::vec3(innerRadius1 * cos(glm::radians(135.0f)), innerRadius1 * sin(glm::radians(135.0f)) , 0.0f),
 
-    glm::vec3(radius * cos(glm::radians(150.0f)), radius * sin(glm::radians(150.0f)) + height, 0.0f),
-    glm::vec3(innerRadius2 * cos(glm::radians(150.0f)), innerRadius2 * sin(glm::radians(150.0f)) + height, 0.0f)
+    glm::vec3(radius * cos(glm::radians(150.0f)), radius * sin(glm::radians(150.0f)) , 0.0f),
+    glm::vec3(innerRadius2 * cos(glm::radians(150.0f)), innerRadius2 * sin(glm::radians(150.0f)) , 0.0f)
 };
 
 
@@ -164,7 +103,7 @@ void AttitudeIndicator::createArc()
 {
     // Çember Yayı vertex ve index verileri
 
-    float arcRadius = 0.6f; // Çemberin yarıçapı
+    float arcRadius = 0.5f; // Çemberin yarıçapı
     int numSegments = 120; // İstenilen segment sayısı (120 derece)
     float arcStep = glm::radians(120.0f) / numSegments; // Adım hesaplama
 
@@ -198,13 +137,13 @@ void AttitudeIndicator::createArcTriangle()
 
     Vertex3 arcTriVertex;
 
-    float radius = 0.6f;
-    float innerRadius = 0.65f;
-    float height =0.2f;
+    float radius = 0.5f;
+    float innerRadius = 0.55f;
+    
     glm::vec3 triangleVertices[] = {
-        glm::vec3(radius*cos(glm::radians(90.0f)),radius*sin(glm::radians(90.0f))+height,0.0f),
-        glm::vec3(innerRadius*cos(glm::radians(92.5f)),innerRadius*sin(glm::radians(92.5f))+height,0.0f),
-        glm::vec3(innerRadius*cos(glm::radians(87.5f)),innerRadius*sin(glm::radians(87.5f))+height,0.0f)
+        glm::vec3(radius*cos(glm::radians(90.0f)),radius*sin(glm::radians(90.0f)),0.0f),
+        glm::vec3(innerRadius*cos(glm::radians(92.5f)),innerRadius*sin(glm::radians(92.5f)),0.0f),
+        glm::vec3(innerRadius*cos(glm::radians(87.5f)),innerRadius*sin(glm::radians(87.5f)),0.0f)
     };
 
     for(int i=0; i<3; i++)
@@ -232,13 +171,13 @@ void AttitudeIndicator::createBankAngle()
 
     Vertex3 bankAngleVertex;
 
-    float radius = 0.60f;
-    float innerRadius = 0.55f;
-    float height =0.15f;
+    float radius = 0.475f;
+    float innerRadius = 0.43f;
+    
     glm::vec3 triangleVertices[] = {
-        glm::vec3(radius*cos(glm::radians(90.0f)),radius*sin(glm::radians(90.0f))+height,0.0f),
-        glm::vec3(innerRadius*cos(glm::radians(92.5f)),innerRadius*sin(glm::radians(92.5f))+height,0.0f),
-        glm::vec3(innerRadius*cos(glm::radians(87.5f)),innerRadius*sin(glm::radians(87.5f))+height,0.0f)
+        glm::vec3(radius*cos(glm::radians(90.0f)),radius*sin(glm::radians(90.0f)),0.0f),
+        glm::vec3(innerRadius*cos(glm::radians(93.0f)),innerRadius*sin(glm::radians(93.0f)),0.0f),
+        glm::vec3(innerRadius*cos(glm::radians(87.0f)),innerRadius*sin(glm::radians(87.0f)),0.0f)
     };
 
     for(int i=0; i<3; i++)
@@ -266,14 +205,13 @@ void AttitudeIndicator::createSlipSkidIndicator()
 
     Vertex3 slipSkidVertex;
 
-    float radius = 0.54f;
-    float innerRadius = 0.525f;
-    float height =0.15f;
+    float radius = 0.42f;
+    float innerRadius = 0.4f;
     glm::vec3 triangleVertices[] = {
-        glm::vec3(radius*cos(glm::radians(92.5f)),radius*sin(glm::radians(92.5f))+height,0.0f),
-        glm::vec3(radius*cos(glm::radians(87.5f)),radius*sin(glm::radians(87.5f))+height,0.0f),
-        glm::vec3(innerRadius*cos(glm::radians(92.5f)),innerRadius*sin(glm::radians(92.5f))+height,0.0f),
-        glm::vec3(innerRadius*cos(glm::radians(87.5f)),innerRadius*sin(glm::radians(87.5f))+height,0.0f)
+        glm::vec3(radius*cos(glm::radians(93.0f)),radius*sin(glm::radians(93.0f)),0.0f),
+        glm::vec3(radius*cos(glm::radians(87.0f)),radius*sin(glm::radians(87.0f)),0.0f),
+        glm::vec3(innerRadius*cos(glm::radians(94.0f)),innerRadius*sin(glm::radians(94.0f)),0.0f),
+        glm::vec3(innerRadius*cos(glm::radians(86.0f)),innerRadius*sin(glm::radians(86.0f)),0.0f)
     };
 
     for(int i=0; i<4; i++)
@@ -294,31 +232,6 @@ void AttitudeIndicator::createSlipSkidIndicator()
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(unsigned int) * slipSkid_Indices.size(), &slipSkid_Indices[0], GL_STATIC_DRAW);
 }
 
-void AttitudeIndicator::drawHorizontalLines(float circleYPositions, float circleRotations)
-{
-    // Yatay çizgi çizimi
-
-    glBindBuffer(GL_ARRAY_BUFFER, horizontalLines_VertexBuffer);
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, horizontalLines_IndexBuffer);
-
-    glm::mat4 model = glm::mat4(1.0f);
-    model = glm::translate(model, glm::vec3(0.0f, 0.2f, 0.0f));
-    model = glm::rotate(model,glm::radians(circleRotations), glm::vec3(0.0f,0.0f,1.0f));
-    model = glm::translate(model,glm::vec3(0.0f,circleYPositions, 0.0f));
-
-    GLuint modelLoc = glGetUniformLocation(program.getProgramId(),"model");
-    GLint posAttrib = glGetAttribLocation(program.getProgramId(), "position");
-    GLint colorUniform = glGetUniformLocation(program.getProgramId(), "color");
-
-    glUniformMatrix4fv(modelLoc,1,GL_FALSE,glm::value_ptr(model));
-    glEnableVertexAttribArray(posAttrib);
-    glVertexAttribPointer(posAttrib, 3, GL_FLOAT, GL_FALSE, 0, 0);
-    glUniform3f(colorUniform, 1.0f, 1.0f, 1.0f);
-
-    glDrawElements(GL_LINES, horizontalLines_IndexCount, GL_UNSIGNED_INT, 0);
-
-    glDisableVertexAttribArray(posAttrib);
-}
 
 void AttitudeIndicator::drawArcScaleLines(float circleYPositions, float circleRotations)
 {
@@ -328,8 +241,8 @@ void AttitudeIndicator::drawArcScaleLines(float circleYPositions, float circleRo
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, arcScaleLines_IndexBuffer);
 
     glm::mat4 scaleModel = glm::mat4(1.0f);
-    scaleModel = glm::translate(scaleModel, glm::vec3(0.0f, 0.2f, 0.0f));
-    scaleModel = glm::rotate(scaleModel,glm::radians(circleRotations), glm::vec3(0.0f,0.0f,1.0f));
+    scaleModel = glm::translate(scaleModel, glm::vec3(0.0f, 0.4f, 0.0f));
+    //scaleModel = glm::rotate(scaleModel,glm::radians(circleRotations), glm::vec3(0.0f,0.0f,1.0f));
 
     GLuint scaleModelLoc = glGetUniformLocation(program.getProgramId(),"model");
     GLint scalePosAttrib = glGetAttribLocation(program.getProgramId(), "position");
@@ -378,8 +291,8 @@ void AttitudeIndicator::drawArcTriangle(float circleYPositions, float circleRota
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, arcTriangle_IndexBuffer);
 
     glm::mat4 arcTriModel = glm::mat4(1.0f);
-    arcTriModel = glm::translate(arcTriModel, glm::vec3(0.0f, 0.2f, 0.0f)); //çemberin konumu
-    arcTriModel = glm::rotate(arcTriModel,glm::radians(circleRotations), glm::vec3(0.0f,0.0f,1.0f));
+    arcTriModel = glm::translate(arcTriModel, glm::vec3(0.0f, 0.4f, 0.0f)); //çemberin konumu
+    //arcTriModel = glm::rotate(arcTriModel,glm::radians(circleRotations), glm::vec3(0.0f,0.0f,1.0f));
 
     GLuint arcTriModelLoc = glGetUniformLocation(program.getProgramId(), "model");
     GLint arcTriPosAttrib = glGetAttribLocation(program.getProgramId(), "position");
@@ -403,7 +316,8 @@ void AttitudeIndicator::drawBankAngle(float circleYPositions, float circleRotati
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, bankAngle_IndexBuffer);
 
     glm::mat4 bankAngleModel = glm::mat4(1.0f);
-    bankAngleModel = glm::translate(bankAngleModel, glm::vec3(0.0f, 0.2f, 0.0f)); //çemberin konumu
+    bankAngleModel = glm::translate(bankAngleModel, glm::vec3(0.0f, 0.4f, 0.0f)); //çemberin konumu
+    bankAngleModel = glm::rotate(bankAngleModel,glm::radians(circleRotations), glm::vec3(0.0f,0.0f,1.0f));
 
     GLuint bankAngleModelLoc = glGetUniformLocation(program.getProgramId(), "model");
     GLint bankAnglePosAttrib = glGetAttribLocation(program.getProgramId(), "position");
@@ -427,7 +341,8 @@ void AttitudeIndicator::drawSlipSkidIndicator(float circleYPositions, float circ
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, slipSkid_IndexBuffer);
 
     glm::mat4 slipSkidModel = glm::mat4(1.0f);
-    slipSkidModel = glm::translate(slipSkidModel, glm::vec3(0.0f, 0.2f, 0.0f)); //çemberin konumu
+    slipSkidModel = glm::translate(slipSkidModel, glm::vec3(0.0f, 0.4f, 0.0f)); //çemberin konumu
+    slipSkidModel = glm::rotate(slipSkidModel,glm::radians(circleRotations), glm::vec3(0.0f,0.0f,1.0f));
     slipSkidModel = glm::translate(slipSkidModel,glm::vec3(slipskid,0.0f, 0.0f));
     GLuint slipSkidModelLoc = glGetUniformLocation(program.getProgramId(), "model");
     GLint slipSkidPosAttrib = glGetAttribLocation(program.getProgramId(), "position");
