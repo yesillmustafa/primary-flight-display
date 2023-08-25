@@ -15,8 +15,8 @@ private:
     GLuint indexBuffer;
      GLuint vertexBuffer_ui;
     GLuint indexBuffer_ui;
-    GLuint textureid;
-    GLuint textureid_ui;
+    GLuint altimeterTex;
+    GLuint uiTex;
     GLuint texCoordBuffer;
 };
 

@@ -1,9 +1,9 @@
 #include "altimeter.hpp"
 #include <GLES2/gl2.h>
 #include <iostream>
-#include "texture.cpp"
+// #include "texture.cpp"
+#include "TextureManager.hpp"
 
-    float art=0.000;
 
 Altimeter::Altimeter() {
     //shaders just include texture
@@ -45,8 +45,9 @@ Altimeter::Altimeter() {
     glGenBuffers(1, &indexBuffer);
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, indexBuffer);
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
-    texture tex;
-    textureid=tex.settextureinner();
+    // texture tex;
+    // textureid=tex.settextureinner();
+    altimeterTex = TextureManager::getInstance()->loadTexture("../images/qa.png");
 
  GLfloat uivertices[] = {
     // Position (X, Y, Z)    Texture Coordinates (S, T)
@@ -77,7 +78,8 @@ GLuint uiindices[] = {
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(uiindices), uiindices, GL_STATIC_DRAW);
 
    
-    textureid_ui=tex.settextureouter();
+    // textureid_ui=tex.settextureouter();
+    uiTex = TextureManager::getInstance()->loadTexture("../images/ui_layer.png");
 
 
 }
@@ -101,8 +103,9 @@ void Altimeter::Draw(float yoffset) {
     glUniform1i(textureUniform, 1); // Assuming texture unit 0
      
     
-    glActiveTexture(GL_TEXTURE1);
-    glBindTexture(GL_TEXTURE_2D, textureid);
+    // glActiveTexture(GL_TEXTURE1);
+    // glBindTexture(GL_TEXTURE_2D, textureid);
+    TextureManager::getInstance()->activateTexture(GL_TEXTURE1,altimeterTex);
 
    
 
@@ -138,8 +141,9 @@ void Altimeter::Draw_ui(){
     glUniform1i(textureUniform_ui, 0); // Assuming texture unit 0
    
 
-    glActiveTexture(GL_TEXTURE0);
-    glBindTexture(GL_TEXTURE_2D, textureid_ui); // Bind the loaded texture
+    // glActiveTexture(GL_TEXTURE0);
+    // glBindTexture(GL_TEXTURE_2D, textureid_ui); // Bind the loaded texture
+    TextureManager::getInstance()->activateTexture(GL_TEXTURE0,uiTex);
 
     glDrawElements(GL_TRIANGLES,12, GL_UNSIGNED_INT, 0);
 

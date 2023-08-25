@@ -14,6 +14,7 @@ set(PROJECT_SOURCES
                 ${PROJECT_SOURCE_DIR}/AttitudeIndicator.cpp
                 ${PROJECT_SOURCE_DIR}/aircraft.cpp
                 ${PROJECT_SOURCE_DIR}/altimeter.cpp
+                ${PROJECT_SOURCE_DIR}/TextureManager.cpp
                 )
 
 
@@ -24,6 +25,8 @@ set(PROJECT_HEADERS
                 ${PROJECT_INCLUDE_DIR}/AttitudeIndicator.hpp
                 ${PROJECT_INCLUDE_DIR}/aircraft.hpp
                 ${PROJECT_INCLUDE_DIR}/altimeter.hpp
+                ${PROJECT_INCLUDE_DIR}/TextureManager.hpp
+                ${PROJECT_INCLUDE_DIR}/stb_image.h
                 )
 
 
