@@ -6,7 +6,7 @@
 #include "AttitudeIndicator.hpp"
 #include "aircraft.hpp"
 #include "altimeter.hpp"
-
+#include <iostream>
 //constants for moving
 float circleYPositions = 0.0f;
 float circleRotations = 0.0f;
@@ -21,11 +21,12 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
             case GLFW_KEY_S:
                circleYPositions += 0.01f;
                 break;
-             case GLFW_KEY_8:
+             case GLFW_KEY_UP:
                 YPositions+=0.01f;
                 break;
-            case GLFW_KEY_2:
+            case GLFW_KEY_DOWN:
                  YPositions-=0.01f;
+                 
                 break;
             case GLFW_KEY_Q:
                 circleRotations -= 0.5f;
@@ -83,17 +84,16 @@ int main() {
         glClear(GL_COLOR_BUFFER_BIT);
 
         landscape.Draw(circleYPositions, circleRotations);
-        ai.Draw(circleYPositions, circleRotations, slipSkidAmount);
+        //ai.Draw(circleYPositions, circleRotations, slipSkidAmount);
         aircraft.Draw();
         //blend for texture transparency
         glEnable(GL_BLEND);
 
         glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
       
-        alti.Draw();
+        alti.Draw(YPositions);
         alti.Draw_ui();
-        // alti.Draw();
-
+        ai.Draw(circleYPositions, circleRotations, slipSkidAmount);
         glDisable(GL_BLEND);
         
         // Pencere ön yüzeyini güncelle

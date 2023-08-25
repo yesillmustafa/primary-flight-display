@@ -9,28 +9,28 @@ Aircraft::Aircraft() {
     program.link();
 
     const float lineWidth = 0.16f;
-
+    const float height=0.3f;
     // Vertex verileri
     GLfloat vertices[] = {
         // Orta Gösterge
-        0.0f, 0.20f, 0.0f,              // 0
-        -lineWidth, 0.14f, 0.0f,            // 1    
-        lineWidth, 0.14f, 0.0f,             // 2
-        0.0f, 0.16f, 0.0f,              // 3
+        0.0f, 0.20f+height, 0.0f,              // 0
+        -lineWidth, 0.14f+height, 0.0f,            // 1    
+        lineWidth, 0.14f+height, 0.0f,             // 2
+        0.0f, 0.16f+height, 0.0f,              // 3
 
         // Sol Gösterge
-        -0.5f, 0.21f, 0.0f,             // 4
-        -0.5f+lineWidth, 0.21f, 0.0f,   // 5
-        -0.49f+lineWidth, 0.20f, 0.0f,  // 6
-        -0.5f+lineWidth, 0.19f, 0.0f,   // 7
-        -0.5f, 0.19f, 0.0f,             // 8
+        -0.5f, 0.21f+height, 0.0f,             // 4
+        -0.5f+lineWidth, 0.21f+height, 0.0f,   // 5
+        -0.49f+lineWidth, 0.20f+height, 0.0f,  // 6
+        -0.5f+lineWidth, 0.19f+height, 0.0f,   // 7
+        -0.5f, 0.19f+height, 0.0f,             // 8
 
         // Sağ Gösterge
-        0.5f, 0.21f, 0.0f,             // 9
-        0.5f-lineWidth, 0.21f, 0.0f,   // 10
-        0.49f-lineWidth, 0.20f, 0.0f,  // 11
-        0.5f-lineWidth, 0.19f, 0.0f,   // 12
-        0.5f, 0.19f, 0.0f             // 13
+        0.5f, 0.21f+height, 0.0f,             // 9
+        0.5f-lineWidth, 0.21f+height, 0.0f,   // 10
+        0.49f-lineWidth, 0.20f+height, 0.0f,  // 11
+        0.5f-lineWidth, 0.19f+height, 0.0f,   // 12
+        0.5f, 0.19f+height, 0.0f             // 13
 
     };
 

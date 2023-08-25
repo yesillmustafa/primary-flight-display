@@ -61,7 +61,7 @@ GLuint texture::settextureouter()
 
     // Replace this with your own texture loading code using stb_image.h
     int width, height, numChannels;
-    unsigned char* data = stbi_load("../images/ui.png", &width, &height, &numChannels, 0);
+    unsigned char* data = stbi_load("../images/text.png", &width, &height, &numChannels, 0);
    
     if (data)
     {

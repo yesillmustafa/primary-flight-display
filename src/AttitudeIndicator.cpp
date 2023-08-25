@@ -48,32 +48,32 @@ void AttitudeIndicator::createHorizontalLines()
 
     // Yatay Çizgi Vertex verileri
     glm::vec3 horizontalLineVertices[] = {
-        glm::vec3(-2.0f, 0.0f, 0.0f),
-        glm::vec3(2.0f, 0.0f, 0.0f),
+        glm::vec3(-2.0f, 0.3f, 0.0f),
+        glm::vec3(2.0f, 0.3f, 0.0f),
 
-        glm::vec3(-lineWidth/3, 0.0f + gapValue, 0.0f),
-        glm::vec3(lineWidth/3, 0.0f + gapValue, 0.0f),
+        glm::vec3(-lineWidth/3, 0.3f + gapValue, 0.0f),
+        glm::vec3(lineWidth/3, 0.3f + gapValue, 0.0f),
 
-        glm::vec3(-lineWidth/3, 0.0f - gapValue, 0.0f),
-        glm::vec3(lineWidth/3, 0.0f - gapValue, 0.0f),
+        glm::vec3(-lineWidth/3, 0.3f - gapValue, 0.0f),
+        glm::vec3(lineWidth/3, 0.3f - gapValue, 0.0f),
 
-        glm::vec3(-lineWidth, 0.0f + gapValue*2, 0.0f),
-        glm::vec3(lineWidth, 0.0f + gapValue*2, 0.0f),
+        glm::vec3(-lineWidth, 0.3f + gapValue*2, 0.0f),
+        glm::vec3(lineWidth, 0.3f + gapValue*2, 0.0f),
 
-        glm::vec3(-lineWidth, 0.0f - gapValue*2, 0.0f),
-        glm::vec3(lineWidth, 0.0f - gapValue*2, 0.0f),
+        glm::vec3(-lineWidth, 0.3f - gapValue*2, 0.0f),
+        glm::vec3(lineWidth, 0.3f - gapValue*2, 0.0f),
 
-        glm::vec3(-lineWidth/3, 0.0f + gapValue*3, 0.0f),
-        glm::vec3(lineWidth/3, 0.0f + gapValue*3, 0.0f),
+        glm::vec3(-lineWidth/3, 0.3f + gapValue*3, 0.0f),
+        glm::vec3(lineWidth/3, 0.3f + gapValue*3, 0.0f),
 
-        glm::vec3(-lineWidth/3, 0.0f - gapValue*3, 0.0f),
-        glm::vec3(lineWidth/3, 0.0f - gapValue*3, 0.0f),
+        glm::vec3(-lineWidth/3, 0.3f - gapValue*3, 0.0f),
+        glm::vec3(lineWidth/3, 0.3f - gapValue*3, 0.0f),
 
-        glm::vec3(-lineWidth, 0.0f + gapValue*4, 0.0f),
-        glm::vec3(lineWidth, 0.0f + gapValue*4, 0.0f),
+        glm::vec3(-lineWidth, 0.3f + gapValue*4, 0.0f),
+        glm::vec3(lineWidth, 0.3f + gapValue*4, 0.0f),
 
-        glm::vec3(-lineWidth, 0.0f - gapValue*4, 0.0f),
-        glm::vec3(lineWidth, 0.0f - gapValue*4, 0.0f)
+        glm::vec3(-lineWidth, 0.3f - gapValue*4, 0.0f),
+        glm::vec3(lineWidth, 0.3f - gapValue*4, 0.0f)
 
     };
 
@@ -104,42 +104,42 @@ void AttitudeIndicator::createArcScaleLines()
 
     Vertex3 scaleVertex;
 
-    float radius = 0.6f;
+    float radius = 0.58f;
     float innerRadius1 = 0.625f;
     float innerRadius2 = 0.65f;
+    float height=0.17f;
+glm::vec3 arcScaleVertices[] = {
+    glm::vec3(radius * cos(glm::radians(30.0f)), radius * sin(glm::radians(30.0f)) + height, 0.0f),
+    glm::vec3(innerRadius2 * cos(glm::radians(30.0f)), innerRadius2 * sin(glm::radians(30.0f)) + height, 0.0f),
 
-    glm::vec3 arcScaleVertices[] = {
-        glm::vec3(radius*cos(glm::radians(30.0f)),radius*sin(glm::radians(30.0f)),0.0f),
-        glm::vec3(innerRadius2*cos(glm::radians(30.0f)),innerRadius2*sin(glm::radians(30.0f)),0.0f),
+    glm::vec3(radius * cos(glm::radians(45.0f)), radius * sin(glm::radians(45.0f)) + height, 0.0f),
+    glm::vec3(innerRadius1 * cos(glm::radians(45.0f)), innerRadius1 * sin(glm::radians(45.0f)) + height, 0.0f),
 
-        glm::vec3(radius*cos(glm::radians(45.0f)),radius*sin(glm::radians(45.0f)),0.0f),
-        glm::vec3(innerRadius1*cos(glm::radians(45.0f)),innerRadius1*sin(glm::radians(45.0f)),0.0f),
+    glm::vec3(radius * cos(glm::radians(60.0f)), radius * sin(glm::radians(60.0f)) + height, 0.0f),
+    glm::vec3(innerRadius2 * cos(glm::radians(60.0f)), innerRadius2 * sin(glm::radians(60.0f)) + height, 0.0f),
 
-        glm::vec3(radius*cos(glm::radians(60.0f)),radius*sin(glm::radians(60.0f)),0.0f),
-        glm::vec3(innerRadius2*cos(glm::radians(60.0f)),innerRadius2*sin(glm::radians(60.0f)),0.0f),
+    glm::vec3(radius * cos(glm::radians(70.0f)), radius * sin(glm::radians(70.0f)) + height, 0.0f),
+    glm::vec3(innerRadius1 * cos(glm::radians(70.0f)), innerRadius1 * sin(glm::radians(70.0f)) + height, 0.0f),
 
-        glm::vec3(radius*cos(glm::radians(70.0f)),radius*sin(glm::radians(70.0f)),0.0f),
-        glm::vec3(innerRadius1*cos(glm::radians(70.0f)),innerRadius1*sin(glm::radians(70.0f)),0.0f),
+    glm::vec3(radius * cos(glm::radians(80.0f)), radius * sin(glm::radians(80.0f)) + height, 0.0f),
+    glm::vec3(innerRadius1 * cos(glm::radians(80.0f)), innerRadius1 * sin(glm::radians(80.0f)) + height, 0.0f),
 
-        glm::vec3(radius*cos(glm::radians(80.0f)),radius*sin(glm::radians(80.0f)),0.0f),
-        glm::vec3(innerRadius1*cos(glm::radians(80.0f)),innerRadius1*sin(glm::radians(80.0f)),0.0f),
+    glm::vec3(radius * cos(glm::radians(100.0f)), radius * sin(glm::radians(100.0f)) + height, 0.0f),
+    glm::vec3(innerRadius1 * cos(glm::radians(100.0f)), innerRadius1 * sin(glm::radians(100.0f)) + height, 0.0f),
 
-        glm::vec3(radius*cos(glm::radians(100.0f)),radius*sin(glm::radians(100.0f)),0.0f),
-        glm::vec3(innerRadius1*cos(glm::radians(100.0f)),innerRadius1*sin(glm::radians(100.0f)),0.0f),
+    glm::vec3(radius * cos(glm::radians(110.0f)), radius * sin(glm::radians(110.0f)) + height, 0.0f),
+    glm::vec3(innerRadius1 * cos(glm::radians(110.0f)), innerRadius1 * sin(glm::radians(110.0f)) + height, 0.0f),
 
-        glm::vec3(radius*cos(glm::radians(110.0f)),radius*sin(glm::radians(110.0f)),0.0f),
-        glm::vec3(innerRadius1*cos(glm::radians(110.0f)),innerRadius1*sin(glm::radians(110.0f)),0.0f),
+    glm::vec3(radius * cos(glm::radians(120.0f)), radius * sin(glm::radians(120.0f)) + height, 0.0f),
+    glm::vec3(innerRadius2 * cos(glm::radians(120.0f)), innerRadius2 * sin(glm::radians(120.0f)) + height, 0.0f),
 
-        glm::vec3(radius*cos(glm::radians(120.0f)),radius*sin(glm::radians(120.0f)),0.0f),
-        glm::vec3(innerRadius2*cos(glm::radians(120.0f)),innerRadius2*sin(glm::radians(120.0f)),0.0f),
+    glm::vec3(radius * cos(glm::radians(135.0f)), radius * sin(glm::radians(135.0f)) + height, 0.0f),
+    glm::vec3(innerRadius1 * cos(glm::radians(135.0f)), innerRadius1 * sin(glm::radians(135.0f)) + height, 0.0f),
 
-        glm::vec3(radius*cos(glm::radians(135.0f)),radius*sin(glm::radians(135.0f)),0.0f),
-        glm::vec3(innerRadius1*cos(glm::radians(135.0f)),innerRadius1*sin(glm::radians(135.0f)),0.0f),
+    glm::vec3(radius * cos(glm::radians(150.0f)), radius * sin(glm::radians(150.0f)) + height, 0.0f),
+    glm::vec3(innerRadius2 * cos(glm::radians(150.0f)), innerRadius2 * sin(glm::radians(150.0f)) + height, 0.0f)
+};
 
-        glm::vec3(radius*cos(glm::radians(150.0f)),radius*sin(glm::radians(150.0f)),0.0f),
-        glm::vec3(innerRadius2*cos(glm::radians(150.0f)),innerRadius2*sin(glm::radians(150.0f)),0.0f)
-
-    };
 
     for(int i=0;i<sizeof(arcScaleVertices) / sizeof(arcScaleVertices[0]);i++)
     {
@@ -175,7 +175,7 @@ void AttitudeIndicator::createArc()
 
     for (int i = 0; i <= numSegments; i++) {
         float angle = glm::radians(30.0f) + arcStep * i;
-        arcVertex.pos = glm::vec3(arcRadius * cos(angle), arcRadius * sin(angle), 0.0f);
+        arcVertex.pos = glm::vec3(arcRadius * cos(angle), arcRadius * sin(angle)+0.18f, 0.0f);
         arc_Vertices.push_back(arcVertex);
         arc_Indices.push_back(i);
     }   
@@ -200,11 +200,11 @@ void AttitudeIndicator::createArcTriangle()
 
     float radius = 0.6f;
     float innerRadius = 0.65f;
-
+    float height =0.2f;
     glm::vec3 triangleVertices[] = {
-        glm::vec3(radius*cos(glm::radians(90.0f)),radius*sin(glm::radians(90.0f)),0.0f),
-        glm::vec3(innerRadius*cos(glm::radians(92.5f)),innerRadius*sin(glm::radians(92.5f)),0.0f),
-        glm::vec3(innerRadius*cos(glm::radians(87.5f)),innerRadius*sin(glm::radians(87.5f)),0.0f)
+        glm::vec3(radius*cos(glm::radians(90.0f)),radius*sin(glm::radians(90.0f))+height,0.0f),
+        glm::vec3(innerRadius*cos(glm::radians(92.5f)),innerRadius*sin(glm::radians(92.5f))+height,0.0f),
+        glm::vec3(innerRadius*cos(glm::radians(87.5f)),innerRadius*sin(glm::radians(87.5f))+height,0.0f)
     };
 
     for(int i=0; i<3; i++)
@@ -234,11 +234,11 @@ void AttitudeIndicator::createBankAngle()
 
     float radius = 0.60f;
     float innerRadius = 0.55f;
-
+    float height =0.15f;
     glm::vec3 triangleVertices[] = {
-        glm::vec3(radius*cos(glm::radians(90.0f)),radius*sin(glm::radians(90.0f)),0.0f),
-        glm::vec3(innerRadius*cos(glm::radians(92.5f)),innerRadius*sin(glm::radians(92.5f)),0.0f),
-        glm::vec3(innerRadius*cos(glm::radians(87.5f)),innerRadius*sin(glm::radians(87.5f)),0.0f)
+        glm::vec3(radius*cos(glm::radians(90.0f)),radius*sin(glm::radians(90.0f))+height,0.0f),
+        glm::vec3(innerRadius*cos(glm::radians(92.5f)),innerRadius*sin(glm::radians(92.5f))+height,0.0f),
+        glm::vec3(innerRadius*cos(glm::radians(87.5f)),innerRadius*sin(glm::radians(87.5f))+height,0.0f)
     };
 
     for(int i=0; i<3; i++)
@@ -268,12 +268,12 @@ void AttitudeIndicator::createSlipSkidIndicator()
 
     float radius = 0.54f;
     float innerRadius = 0.525f;
-
+    float height =0.15f;
     glm::vec3 triangleVertices[] = {
-        glm::vec3(radius*cos(glm::radians(92.5f)),radius*sin(glm::radians(92.5f)),0.0f),
-        glm::vec3(radius*cos(glm::radians(87.5f)),radius*sin(glm::radians(87.5f)),0.0f),
-        glm::vec3(innerRadius*cos(glm::radians(92.5f)),innerRadius*sin(glm::radians(92.5f)),0.0f),
-        glm::vec3(innerRadius*cos(glm::radians(87.5f)),innerRadius*sin(glm::radians(87.5f)),0.0f)
+        glm::vec3(radius*cos(glm::radians(92.5f)),radius*sin(glm::radians(92.5f))+height,0.0f),
+        glm::vec3(radius*cos(glm::radians(87.5f)),radius*sin(glm::radians(87.5f))+height,0.0f),
+        glm::vec3(innerRadius*cos(glm::radians(92.5f)),innerRadius*sin(glm::radians(92.5f))+height,0.0f),
+        glm::vec3(innerRadius*cos(glm::radians(87.5f)),innerRadius*sin(glm::radians(87.5f))+height,0.0f)
     };
 
     for(int i=0; i<4; i++)
