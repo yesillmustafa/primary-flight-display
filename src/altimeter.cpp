@@ -13,10 +13,10 @@ Altimeter::Altimeter() {
     GLfloat vertices[] = {
         // Position (X, Y, Z)    Texture Coordinates (S, T)
 
-        0.775f,  0.9375f, 0.0f,     1.0f, -1.0f,
-        0.575f, 0.9375f, 0.0f,     0.0f, -1.0f,
-        0.775f, -0.1875f, 0.0f,     1.0f, 0.0f,
-        0.575f, -0.1875f, 0.0f,     0.0001f, 0.0001f, //vs allows bigger or lower than 0.0
+        0.775f,  7.9375f, 0.0f,     1.0f, -1.0f,
+        0.575f, 7.9375f, 0.0f,     0.0f, -1.0f,
+        0.775f, -7.1875f, 0.0f,     1.0f, 0.0f,
+        0.575f, -7.1875f, 0.0f,     0.0001f, 0.0001f, //vs allows bigger or lower than 0.0
 
     };
 
@@ -41,7 +41,7 @@ Altimeter::Altimeter() {
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
 
     //load texture
-    altimeterTex = TextureManager::getInstance()->loadTexture("../images/altimeter.png");
+    altimeterTex = TextureManager::getInstance()->loadTexture("../images/altimetertex.png");
 
 }
 

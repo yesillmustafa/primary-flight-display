@@ -13,7 +13,7 @@
 float circleYPositions = 0.0f;
 float circleRotations = 0.0f;
 float slipSkidAmount = 0.0f;
-float YPositions = 0.0f;
+float YPositions =0.4619f;// starting position
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods) {
     if (action == GLFW_PRESS || action == GLFW_REPEAT) {
         switch (key) {
@@ -24,11 +24,13 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
                circleYPositions += 0.01f;
                 break;
              case GLFW_KEY_UP:
-                YPositions+=0.01f;
+             if(YPositions!=0.4619f)//lower bound
+                YPositions+=0.001f;
                 break;
             case GLFW_KEY_DOWN:
-                 YPositions-=0.01f;
-                 
+                if(YPositions>=-0.463095f)//upper bound
+                 YPositions-=0.001f;
+                 std::cout<<YPositions<<std::endl;
                 break;
             case GLFW_KEY_Q:
                 circleRotations -= 0.5f;
