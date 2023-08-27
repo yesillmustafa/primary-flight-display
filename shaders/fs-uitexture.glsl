@@ -9,7 +9,7 @@ void main() {
     // Eğer texColor'ın rengi siyaha yakınsa alfa değerini kıs
     float grayscale = dot(texColor.rgb, vec3(0.2126, 0.7152, 0.0722));
     if (grayscale < 0.1) { // Eşik değeri burada ayarlanabilir
-        texColor.a *= 0.5; // Alfa değeri
+        texColor.a *= 0.3; // Alfa değeri
     }
     
     gl_FragColor = texColor;

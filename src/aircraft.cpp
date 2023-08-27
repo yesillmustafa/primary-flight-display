@@ -8,7 +8,7 @@ Aircraft::Aircraft() {
     program.attachShader("../shaders/fs-indicator.glsl", GL_FRAGMENT_SHADER);
     program.link();
 
-    const float lineWidth = 0.16f;
+    const float lineWidth = 0.15f;
     const float height=0.2f;
     // Vertex verileri
     GLfloat vertices[] = {
@@ -19,18 +19,18 @@ Aircraft::Aircraft() {
         0.0f, 0.16f+height, 0.0f,              // 3
 
         // Sol Gösterge
-        -0.5f, 0.21f+height, 0.0f,             // 4
-        -0.5f+lineWidth, 0.21f+height, 0.0f,   // 5
-        -0.49f+lineWidth, 0.20f+height, 0.0f,  // 6
-        -0.5f+lineWidth, 0.19f+height, 0.0f,   // 7
-        -0.5f, 0.19f+height, 0.0f,             // 8
+        -0.45f, 0.21f+height, 0.0f,             // 4
+        -0.45f+lineWidth, 0.21f+height, 0.0f,   // 5
+        -0.43f+lineWidth, 0.20f+height, 0.0f,  // 6
+        -0.45f+lineWidth, 0.19f+height, 0.0f,   // 7
+        -0.45f, 0.19f+height, 0.0f,             // 8
 
         // Sağ Gösterge
-        0.5f, 0.21f+height, 0.0f,             // 9
-        0.5f-lineWidth, 0.21f+height, 0.0f,   // 10
-        0.49f-lineWidth, 0.20f+height, 0.0f,  // 11
-        0.5f-lineWidth, 0.19f+height, 0.0f,   // 12
-        0.5f, 0.19f+height, 0.0f             // 13
+        0.45f, 0.21f+height, 0.0f,             // 9
+        0.45f-lineWidth, 0.21f+height, 0.0f,   // 10
+        0.43f-lineWidth, 0.20f+height, 0.0f,  // 11
+        0.45f-lineWidth, 0.19f+height, 0.0f,   // 12
+        0.45f, 0.19f+height, 0.0f             // 13
 
     };
 
