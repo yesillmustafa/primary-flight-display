@@ -9,11 +9,14 @@
 #include "SpeedIndicator.hpp"
 #include "UserInterface.hpp"
 #include <iostream>
+#include <math.h>
 //constants for moving
 float circleYPositions = 0.0f;
 float circleRotations = 0.0f;
 float slipSkidAmount = 0.0f;
-float YPositions =0.4619f;// starting position
+float YPositions = 0.0025f;
+float altitudeValue;
+
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods) {
     if (action == GLFW_PRESS || action == GLFW_REPEAT) {
         switch (key) {
@@ -24,13 +27,12 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
                circleYPositions += 0.01f;
                 break;
              case GLFW_KEY_UP:
-             if(YPositions!=0.4619f)//lower bound
-                YPositions+=0.001f;
+                YPositions-=0.0005f;
+                altitudeValue = round(-((YPositions - 0.0025)*40000));
                 break;
             case GLFW_KEY_DOWN:
-                if(YPositions>=-0.463095f)//upper bound
-                 YPositions-=0.001f;
-                 std::cout<<YPositions<<std::endl;
+                 YPositions+=0.0005f;
+                 altitudeValue = round(-((YPositions - 0.0025)*40000));
                 break;
             case GLFW_KEY_Q:
                 circleRotations -= 0.5f;
@@ -86,6 +88,8 @@ int main() {
 
     // Sonsuz döngüyü başlat
     while (!glfwWindowShouldClose(window)) {
+        
+
         // Renk tamponunu temizle (mavi)
         glClearColor(0.0f, 0.541f, 0.816f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT);

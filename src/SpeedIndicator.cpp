@@ -13,10 +13,10 @@ SpeedIndicator::SpeedIndicator() {
     GLfloat vertices[] = {
         // Position (X, Y, Z)    Texture Coordinates (S, T)
 
-        -0.775f,  0.9375, 0.0f,    -1.0f, -1.0f,
-        -0.575f,  0.9375, 0.0f,    0.0f, -1.0f,
-        -0.775f, -0.1875f, 0.0f,    -1.0f, 0.0f,
-        -0.575f, -0.1875f, 0.0f,    0.0001f, 0.0001f,//vs allows bigger or lower than 0.0
+        -0.775f,  0.875, 0.0f,    -1.0f, -1.0f,
+        -0.575f,  0.875, 0.0f,    0.0f, -1.0f,
+        -0.775f, -0.125f, 0.0f,    -1.0f, 0.0f,
+        -0.575f, -0.125f, 0.0f,    0.0001f, 0.0001f,//vs allows bigger or lower than 0.0
 
     };
 

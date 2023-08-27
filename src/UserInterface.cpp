@@ -6,17 +6,17 @@
 
 UserInterface::UserInterface() {
     //shaders just include texture
-    program.attachShader("../shaders/vs-usetexture.glsl", GL_VERTEX_SHADER);
-    program.attachShader("../shaders/fs-usetexture.glsl", GL_FRAGMENT_SHADER);
+    program.attachShader("../shaders/vs-uitexture.glsl", GL_VERTEX_SHADER);
+    program.attachShader("../shaders/fs-uitexture.glsl", GL_FRAGMENT_SHADER);
     program.link();
 
 
  GLfloat uivertices[] = {
     // Position (X, Y, Z)    Texture Coordinates (S, T)
-    1.0f,  1.0f, 0.0f,     0.0f, 0.0f,
-    -1.0f,  1.0f, 0.0f,    1.0f, 0.0f,
-    1.0f, -1.0f, 0.0f,     0.0f, 1.0f,
-    -1.0f, -1.0f, 0.0f,    1.0f, 1.0f,
+    1.0f,  1.0f, 0.0f,     1.0f, -1.0f,
+    -1.0f,  1.0f, 0.0f,    0.0f, -1.0f,
+    1.0f, -1.0f, 0.0f,     1.0f, 0.0f,
+    -1.0f, -1.0f, 0.0f,    0.0f, 0.0f,
 };
 
     glGenBuffers(1, &vertexBuffer);
@@ -36,7 +36,7 @@ GLuint uiindices[] = {
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(uiindices), uiindices, GL_STATIC_DRAW);
 
     //load texture
-    uiTex = TextureManager::getInstance()->loadTexture("../images/ui_layer.png");
+    uiTex = TextureManager::getInstance()->loadTexture("../images/new-ui.png");
 
 }
 
