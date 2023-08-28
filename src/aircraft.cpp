@@ -1,13 +1,11 @@
 #include "aircraft.hpp"
 #include <GLES2/gl2.h>
 #include <iostream>
-
 Aircraft::Aircraft() {
 
     program.attachShader("../shaders/vs-indicator.glsl", GL_VERTEX_SHADER);
     program.attachShader("../shaders/fs-indicator.glsl", GL_FRAGMENT_SHADER);
     program.link();
-
     const float lineWidth = 0.15f;
     const float height=0.2f;
     // Vertex verileri
@@ -62,3 +60,4 @@ void Aircraft::Draw() {
     glDisableVertexAttribArray(posAttrib);
     glUseProgram(0);
 }
+

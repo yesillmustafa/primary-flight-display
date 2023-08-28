@@ -1,27 +1,23 @@
-#include "SpeedIndicator.hpp"
+#include "verticalspeed.hpp"
 #include <GLES2/gl2.h>
 #include <iostream>
 #include "TextureManager.hpp"
 
 
-SpeedIndicator::SpeedIndicator() {
+verticalSpeed::verticalSpeed() {
     //shaders just include texture
     program.attachShader("../shaders/vs-usetexture.glsl", GL_VERTEX_SHADER);
     program.attachShader("../shaders/fs-usetexture.glsl", GL_FRAGMENT_SHADER);
     program.link();
-
-    GLfloat vertices[] = {
+GLfloat vertices[] = {
         // Position (X, Y, Z)    Texture Coordinates (S, T)
 
-        -0.775f,  0.875, 0.0f,    -1.0f, -0.2f,
-        -0.575f,  0.875, 0.0f,    0.0f, -0.2f,
-        -0.775f, -0.125f, 0.0f,    -1.0f, 0.0f,
-        -0.575f, -0.125f, 0.0f,    0.000001f, 0.000001f,//vs allows bigger or lower than 0.0
+        0.925f,  0.762f, 0.0f,     1.0f, -1.0f,
+        0.8f, 0.762f, 0.0f,     0.0f, -1.0f,
+        0.925f, 0.0625f, 0.0f,     1.0f, 0.00000000001f,
+        0.8f, 0.0625f, 0.0f,     0.0f, 0.00000000001f,
 
     };
-
-
-
 
     glGenBuffers(1, &vertexBuffer);
     glBindBuffer(GL_ARRAY_BUFFER, vertexBuffer);
@@ -33,26 +29,27 @@ SpeedIndicator::SpeedIndicator() {
         4, 5, 6, // Üçüncü üçgen
         5, 6, 7  // Dördüncü üçgen
     };
-
-
-
+   
     glGenBuffers(1, &indexBuffer);
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, indexBuffer);
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
 
-    //load texture
-    siTex = TextureManager::getInstance()->loadTexture("../images/speedindicator.png");
+   
+   //load texture
+     vertiTex = TextureManager::getInstance()->loadTexture("../images/tspeed.png");
+
+  
+   
 
 }
 
-void SpeedIndicator::Draw(float yoffset) {
+void verticalSpeed::Draw() {
     program.use();
     glBindBuffer(GL_ARRAY_BUFFER, vertexBuffer);
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, indexBuffer);
 
     GLint posAttrib = glGetAttribLocation(program.getProgramId(), "a_position");
     GLint texCoordAttrib = glGetAttribLocation(program.getProgramId(), "texCoordy");
-    GLint yoffsetloc = glGetUniformLocation(program.getProgramId(), "modelYOffset");
     GLint textureUniform = glGetUniformLocation(program.getProgramId(), "textureSampler");
 
     glEnableVertexAttribArray(posAttrib);
@@ -60,11 +57,10 @@ void SpeedIndicator::Draw(float yoffset) {
 
     glEnableVertexAttribArray(texCoordAttrib);
     glVertexAttribPointer(texCoordAttrib, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(GLfloat), (void*)(3 * sizeof(GLfloat)));
-    glUniform1f(yoffsetloc, yoffset);
     glUniform1i(textureUniform, 1); // Assuming texture unit 0
 
     //activate texture
-    TextureManager::getInstance()->activateTexture(GL_TEXTURE1,siTex);
+    TextureManager::getInstance()->activateTexture(GL_TEXTURE1,vertiTex);
 
     glDrawElements(GL_TRIANGLES, 12, GL_UNSIGNED_INT, 0);
 
