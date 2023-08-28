@@ -13,7 +13,6 @@ private:
 
     void createLines();
     void createLandscape();
-
     void drawLines(float circleYPositions, float circleRotations);
     void drawLandscape(float circleYPositions, float circleRotations);
 

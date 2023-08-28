@@ -17,6 +17,8 @@ set(PROJECT_SOURCES
                 ${PROJECT_SOURCE_DIR}/TextureManager.cpp
                 ${PROJECT_SOURCE_DIR}/UserInterface.cpp
                 ${PROJECT_SOURCE_DIR}/SpeedIndicator.cpp
+                ${PROJECT_SOURCE_DIR}/verticalspeed.cpp
+                ${PROJECT_SOURCE_DIR}/verticalspeedindis.cpp
                 )
 
 
@@ -31,6 +33,8 @@ set(PROJECT_HEADERS
                 ${PROJECT_INCLUDE_DIR}/stb_image.h
                 ${PROJECT_INCLUDE_DIR}/UserInterface.hpp
                 ${PROJECT_INCLUDE_DIR}/SpeedIndicator.hpp
+                ${PROJECT_SOURCE_DIR}/verticalspeed.hpp
+                ${PROJECT_SOURCE_DIR}/verticalspeedindis.hpp
                 )
 
 

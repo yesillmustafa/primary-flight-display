@@ -13,9 +13,10 @@ Landscape::Landscape(){
     program.attachShader("../shaders/vs-landscape.glsl", GL_VERTEX_SHADER);
     program.attachShader("../shaders/fs-landscape.glsl", GL_FRAGMENT_SHADER);
     program.link();
-    
+
     createLandscape();
     createLines();
+   
 
 }
 
@@ -110,6 +111,7 @@ void Landscape::createLines()
     glBufferData(GL_ELEMENT_ARRAY_BUFFER,sizeof(unsigned int)*hl_Indices.size(),&hl_Indices[0],GL_STATIC_DRAW);
 }
 
+
 void Landscape::drawLandscape(float circleYPositions, float circleRotations)
 {
     glBindBuffer(GL_ARRAY_BUFFER, vertexBuffer);
@@ -158,3 +160,4 @@ void Landscape::drawLines(float circleYPositions, float circleRotations)
 
     glDisableVertexAttribArray(posAttrib);
 }
+
