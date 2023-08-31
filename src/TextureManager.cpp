@@ -33,8 +33,13 @@ unsigned int TextureManager::loadTexture(std::string fileName)
     else
     {
         int width, height, nrChannels;
+        if(fileName == "../images/hi.png"){
+            stbi_set_flip_vertically_on_load(true);
+        }
+        else {
+            stbi_set_flip_vertically_on_load(false);
 
-        stbi_set_flip_vertically_on_load(false);
+        }
         unsigned char*data = stbi_load(fileName.c_str(),&width,&height,&nrChannels,0);
 
         GLenum format = GL_RGB;
