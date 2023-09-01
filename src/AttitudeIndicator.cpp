@@ -114,7 +114,7 @@ void AttitudeIndicator::createArc()
 
     for (int i = 0; i <= numSegments; i++) {
         float angle = glm::radians(30.0f) + arcStep * i;
-        arcVertex.pos = glm::vec3(arcRadius * cos(angle), arcRadius * sin(angle)+0.18f, 0.0f);
+        arcVertex.pos = glm::vec3(arcRadius * cos(angle), arcRadius * sin(angle), 0.0f);
         arc_Vertices.push_back(arcVertex);
         arc_Indices.push_back(i);
     }   

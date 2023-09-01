@@ -10,6 +10,7 @@
 #include "UserInterface.hpp"
 #include "verticalspeed.hpp"
 #include "verticalspeedindis.hpp"
+#include "HeadingIndicator.hpp"
 #include <iostream>
 #include <math.h>
 //constants for moving
@@ -107,6 +108,7 @@ int main() {
     UserInterface ui;
     verticalSpeed vs;
     VSpeed vs_s;
+    HeadingIndicator hi;
 
 
     // Sonsuz döngüyü başlat
@@ -129,6 +131,8 @@ int main() {
        
         alti.Draw(YPositions);
         speedindicator.Draw(speedYPositions);
+        hi.Draw(circleYPositions, circleRotations);
+
         ui.Draw();
         glDisable(GL_BLEND);
 
