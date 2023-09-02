@@ -63,7 +63,6 @@ HeadingIndicator::HeadingIndicator() {
 
     hiTex = TextureManager::getInstance()->loadTexture("../images/hi.png");
 
-    std::cout << indexCount << std::endl;
 }
 
 void HeadingIndicator::Draw(float circleYPositions, float circleRotations) {

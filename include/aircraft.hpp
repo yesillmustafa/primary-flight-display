@@ -9,10 +9,18 @@ public:
     Aircraft();
     void Draw();
 private:
+    void createAircraftAI();
+    void createAircraftHI();
+
+    void drawAircraftAI();
+    void drawAircraftHI();
+
     float height=0.0;
     ShaderProgram program;
-    GLuint vertexBuffer;
-    GLuint indexBuffer;
+    GLuint AI_vertexBuffer;
+    GLuint AI_indexBuffer;
+    GLuint HI_vertexBuffer;
+    GLuint HI_indexBuffer;
 };
 
 #endif // AIRCRAFT_HPP

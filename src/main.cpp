@@ -19,7 +19,7 @@ float circleYPositions = 0.0f;
 float circleRotations = 0.0f;
 float slipSkidAmount = 0.0f;
 float YPositions = 0.0025f;
-float speedindis=0.0;
+
 float altitudeValue;
 float speedYPositions = 0.0045f;
 
@@ -27,16 +27,13 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
     if (action == GLFW_PRESS || action == GLFW_REPEAT) {
         switch (key) {
             case GLFW_KEY_W:
-                circleYPositions -= 0.01f;
-                if( speedindis>=-0.35)
-                {speedindis-=0.01;}
-               // std::cout<<speedindis<<std::endl;
+                circleYPositions -= 0.005f;
+
                 break;
             case GLFW_KEY_S:
-                if(speedindis<=0.27 )
-                {speedindis+=0.01;}
-               circleYPositions += 0.01f;
-               std::cout<<speedindis<<std::endl;
+
+               circleYPositions += 0.005f;
+
                 break;
              case GLFW_KEY_UP:
                 YPositions-=0.0005f;
@@ -124,8 +121,7 @@ int main() {
         glClear(GL_COLOR_BUFFER_BIT);
 
         landscape.Draw(circleYPositions, circleRotations);
-        //ai.Draw(circleYPositions, circleRotations, slipSkidAmount);
-        aircraft.Draw();
+
         vs_s.Draw_indicator(math.calculataVSI(circleYPositions,speedYPositions));
         // //blend for texture transparency
         glEnable(GL_BLEND);
@@ -141,6 +137,7 @@ int main() {
         glDisable(GL_BLEND);
 
         ai.Draw(circleYPositions, circleRotations, slipSkidAmount);
+        aircraft.Draw();
         
         // Pencere ön yüzeyini güncelle
         glfwSwapBuffers(window);

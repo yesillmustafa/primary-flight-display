@@ -36,7 +36,7 @@ GLuint uiindices[] = {
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(uiindices), uiindices, GL_STATIC_DRAW);
 
     //load texture
-    uiTex = TextureManager::getInstance()->loadTexture("../images/new-ui.png");
+    uiTex = TextureManager::getInstance()->loadTexture("../images/ui.png");
 
 }
 

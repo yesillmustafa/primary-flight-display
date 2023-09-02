@@ -47,7 +47,15 @@ void VSpeed::Draw_indicator(float yoffset){
     glUniform1f(glGetUniformLocation(program.getProgramId(), "modelYOffset"), yoffset);
     glEnableVertexAttribArray(posAttrib);
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), (void*)0);
-    glUniform3f(colorUniform, 1.0f, 0.0f, 0.0f);
+    if(yoffset > 0)
+    {
+        glUniform3f(colorUniform, 0.0f, 1.0f, 0.0f);
+    }
+    else
+    {
+        glUniform3f(colorUniform, 1.0f, 0.0f, 0.0f);
+    }
+    
     glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 
     glDisableVertexAttribArray(posAttrib);

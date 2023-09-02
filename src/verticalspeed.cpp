@@ -12,10 +12,10 @@ verticalSpeed::verticalSpeed() {
 GLfloat vertices[] = {
         // Position (X, Y, Z)    Texture Coordinates (S, T)
 
-        0.925f,  0.762f, 0.0f,     1.0f, -1.0f,
-        0.8f, 0.762f, 0.0f,     0.0f, -1.0f,
-        0.925f, 0.0625f, 0.0f,     1.0f, 0.00000000001f,
-        0.8f, 0.0625f, 0.0f,     0.0f, 0.00000000001f,
+        0.925f,  0.7125f, 0.0f,     1.0f, -1.0f,
+        0.8f, 0.7125f, 0.0f,     0.0f, -1.0f,
+        0.925f, 0.0875f, 0.0f,     1.0f, 0.0f,
+        0.8f, 0.0875f, 0.0f,     0.0f, 0.0f,
 
     };
 
@@ -36,7 +36,7 @@ GLfloat vertices[] = {
 
    
    //load texture
-     vertiTex = TextureManager::getInstance()->loadTexture("../images/tspeed.png");
+     vertiTex = TextureManager::getInstance()->loadTexture("../images/verticalspeed.jpg");
 
   
    

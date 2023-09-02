@@ -41,7 +41,7 @@ SpeedIndicator::SpeedIndicator() {
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
 
     //load texture
-    siTex = TextureManager::getInstance()->loadTexture("../images/speedindicator.png");
+    siTex = TextureManager::getInstance()->loadTexture("../images/speedindicator.jpg");
 
 }
 
