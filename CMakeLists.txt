@@ -20,6 +20,7 @@ set(PROJECT_SOURCES
                 ${PROJECT_SOURCE_DIR}/verticalspeed.cpp
                 ${PROJECT_SOURCE_DIR}/verticalspeedindis.cpp
                 ${PROJECT_SOURCE_DIR}/HeadingIndicator.cpp
+                ${PROJECT_SOURCE_DIR}/Mathematics.cpp
                 )
 
 
@@ -37,6 +38,7 @@ set(PROJECT_HEADERS
                 ${PROJECT_SOURCE_DIR}/verticalspeed.hpp
                 ${PROJECT_SOURCE_DIR}/verticalspeedindis.hpp
                 ${PROJECT_SOURCE_DIR}/HeadingIndicator.hpp
+                ${PROJECT_SOURCE_DIR}/Mathematics.hpp
                 )
 
 

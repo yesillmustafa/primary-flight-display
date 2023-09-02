@@ -14,8 +14,8 @@ void VSpeed::creatIndicator(){
      GLfloat vertices_ind[] = {
         // Position (X, Y, Z)    
 
-        0.925f,  0.42f, 0.0f,     
-        0.8f, 0.42f, 0.0f,     
+        0.925f,  0.40002f, 0.0f,     
+        0.8f, 0.400002f, 0.0f,     
         0.925f, 0.40f, 0.0f,    
         0.8f, 0.40f, 0.0f,     
 
