@@ -11,6 +11,7 @@
 #include "verticalspeed.hpp"
 #include "verticalspeedindis.hpp"
 #include "HeadingIndicator.hpp"
+#include "Mathematics.hpp"
 #include <iostream>
 #include <math.h>
 //constants for moving
@@ -35,15 +36,17 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
                 if(speedindis<=0.27 )
                 {speedindis+=0.01;}
                circleYPositions += 0.01f;
-              // std::cout<<speedindis<<std::endl;
+               std::cout<<speedindis<<std::endl;
                 break;
              case GLFW_KEY_UP:
                 YPositions-=0.0005f;
-                altitudeValue = round(-((YPositions - 0.0025)*40000));
+              //  altitudeValue = round(-((YPositions - 0.0025)*40000));
+               // std::cout<<altitudeValue<<std::endl;
                 break;
             case GLFW_KEY_DOWN:
                  YPositions+=0.0005f;
-                 altitudeValue = round(-((YPositions - 0.0025)*40000));
+                 //altitudeValue = round(-((YPositions - 0.0025)*40000));
+                 //std::cout<<altitudeValue<<std::endl;
                 break;
             case GLFW_KEY_Q:
                 circleRotations -= 0.5f;
@@ -60,13 +63,13 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
             case GLFW_KEY_Y:
                 speedYPositions-=0.0005f;
                 altitudeValue = (round(-((speedYPositions - 0.0045)*40000))+40)/100;
-                std::cout<<altitudeValue<<std::endl;
+                //std::cout<<altitudeValue<<std::endl;
 
                 break;
             case GLFW_KEY_H:
                  speedYPositions+=0.0005f;
                   altitudeValue = (round(-((speedYPositions - 0.0045)*40000))+40)/100;
-                std::cout<<altitudeValue<<std::endl;
+               // std::cout<<altitudeValue<<std::endl;
 
                 break;
            
@@ -109,6 +112,7 @@ int main() {
     verticalSpeed vs;
     VSpeed vs_s;
     HeadingIndicator hi;
+    MATH math;
 
 
     // Sonsuz döngüyü başlat
@@ -122,14 +126,14 @@ int main() {
         landscape.Draw(circleYPositions, circleRotations);
         //ai.Draw(circleYPositions, circleRotations, slipSkidAmount);
         aircraft.Draw();
-        vs_s.Draw_indicator(speedindis);
+        vs_s.Draw_indicator(math.calculataVSI(circleYPositions,speedYPositions));
         // //blend for texture transparency
         glEnable(GL_BLEND);
 
         glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
         vs.Draw();
        
-        alti.Draw(YPositions);
+        alti.Draw(math.calculateAltitude(YPositions));
         speedindicator.Draw(speedYPositions);
         hi.Draw(circleYPositions, circleRotations);
 
