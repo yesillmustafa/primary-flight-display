@@ -54,7 +54,7 @@ void Landscape::createLandscape()
 
 void Landscape::createLines()
 {
-    const float gapValue = 0.08f;
+    const float gapValue = 0.1f;
     const float lineWidth = 0.14f;
 
     Vertex3List hl_Vertices;

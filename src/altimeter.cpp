@@ -41,7 +41,7 @@ Altimeter::Altimeter() {
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
 
     //load texture
-    altimeterTex = TextureManager::getInstance()->loadTexture("../images/taslak-alti.jpg");
+    altimeterTex = TextureManager::getInstance()->loadTexture("../images/altimeter.jpg");
 
 }
 
