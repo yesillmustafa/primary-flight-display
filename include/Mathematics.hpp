@@ -11,7 +11,7 @@ public:
     float calculateAltitude(float altiPositions);
 
     private : 
-
+    float altitude;
 };
 
 #endif
