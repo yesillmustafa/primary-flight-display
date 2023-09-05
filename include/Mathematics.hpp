@@ -8,10 +8,11 @@ class MATH
 {
 public:
     float calculataVSI(float pitchValue,float speedValue );
-    float calculateAltitude(float altiPositions);
+    float calculateAltitude(float passingTime);
 
-    private : 
-    float altitude;
+private : 
+    float vspeedValue = 0.0f;
+    float altitude = 0.0025f;
 };
 
 #endif
