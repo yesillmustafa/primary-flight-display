@@ -14,6 +14,9 @@
 #include "Mathematics.hpp"
 #include <iostream>
 #include <math.h>
+#include <chrono>
+#include <thread>
+
 //constants for moving
 float circleYPositions = 0.0f;
 float circleRotations = 0.0f;
@@ -59,13 +62,13 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
                 break;
             case GLFW_KEY_Y:
                 speedYPositions-=0.0005f;
-                altitudeValue = (round(-((speedYPositions - 0.0045)*40000))+40)/100;
+                // altitudeValue = (round(-((speedYPositions - 0.0045)*40000)));
                 //std::cout<<altitudeValue<<std::endl;
 
                 break;
             case GLFW_KEY_H:
                  speedYPositions+=0.0005f;
-                  altitudeValue = (round(-((speedYPositions - 0.0045)*40000))+40)/100;
+                //   altitudeValue = (round(-((speedYPositions - 0.0045)*40000)));
                // std::cout<<altitudeValue<<std::endl;
 
                 break;
@@ -112,10 +115,20 @@ int main() {
     MATH math;
 
 
+    double passingTime;
+    auto startTime = std::chrono::high_resolution_clock::now();
+
     // Sonsuz döngüyü başlat
     while (!glfwWindowShouldClose(window)) {
-        
 
+        if(math.calculataVSI(circleYPositions,speedYPositions) ==  0.0f)
+        {
+            startTime = std::chrono::high_resolution_clock::now();
+        }
+        auto currentTime = std::chrono::high_resolution_clock::now();
+        passingTime = std::chrono::duration<double>(currentTime - startTime).count();
+        std::cout<<"Saniye: "<< int(passingTime) << std::endl;
+        
         // Renk tamponunu temizle (mavi)
         glClearColor(0.0f, 0.541f, 0.816f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT);
@@ -129,7 +142,7 @@ int main() {
         glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
         vs.Draw();
        
-        alti.Draw(math.calculateAltitude(YPositions));
+        alti.Draw(math.calculateAltitude(passingTime));
         speedindicator.Draw(speedYPositions);
         hi.Draw(circleYPositions, circleRotations);
 
