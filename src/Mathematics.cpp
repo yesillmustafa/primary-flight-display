@@ -48,8 +48,8 @@ float MATH::calculateAltitude(float passingTime)
     // altitude = vspeedValue * passingTime;
 
     
-    std::cout <<"altitude: "<< altitude << std::endl;
+    std::cout <<"altitude: "<< -1*(((altitude * 0.000025)/2.0)*100000) << std::endl;
 
-    return altitude * 0.000025;
+    return altitude * 0.00003025;
 
 }
