@@ -21,6 +21,11 @@ set(PROJECT_SOURCES
                 ${PROJECT_SOURCE_DIR}/verticalspeedindis.cpp
                 ${PROJECT_SOURCE_DIR}/HeadingIndicator.cpp
                 ${PROJECT_SOURCE_DIR}/Mathematics.cpp
+                ${PROJECT_SOURCE_DIR}/TexToScreen.cpp
+                ${PROJECT_SOURCE_DIR}/VBO.cpp
+                ${PROJECT_SOURCE_DIR}/Texture.cpp
+                ${PROJECT_SOURCE_DIR}/EBO.cpp
+                ${PROJECT_SOURCE_DIR}/shaderClass.cpp
                 )
 
 
@@ -39,6 +44,13 @@ set(PROJECT_HEADERS
                 ${PROJECT_SOURCE_DIR}/verticalspeedindis.hpp
                 ${PROJECT_SOURCE_DIR}/HeadingIndicator.hpp
                 ${PROJECT_SOURCE_DIR}/Mathematics.hpp
+                ${PROJECT_SOURCE_DIR}/Texture.h
+                ${PROJECT_SOURCE_DIR}/TexToScreen.hpp
+                ${PROJECT_SOURCE_DIR}/EBO.h
+                ${PROJECT_SOURCE_DIR}/shaderClass.h
+                ${PROJECT_SOURCE_DIR}/VBO.h
+
+                
                 )
 
 

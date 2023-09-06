@@ -12,6 +12,7 @@
 #include "verticalspeedindis.hpp"
 #include "HeadingIndicator.hpp"
 #include "Mathematics.hpp"
+#include "TexToScreen.hpp"
 #include <iostream>
 #include <math.h>
 #include <chrono>
@@ -113,7 +114,7 @@ int main() {
     VSpeed vs_s;
     HeadingIndicator hi;
     MATH math;
-
+    tex  text;
 
     double passingTime;
     auto startTime = std::chrono::high_resolution_clock::now();
@@ -134,21 +135,22 @@ int main() {
         glClear(GL_COLOR_BUFFER_BIT);
 
         landscape.Draw(circleYPositions, circleRotations);
-
+        
         vs_s.Draw_indicator(math.calculataVSI(circleYPositions,speedYPositions));
         // //blend for texture transparency
         glEnable(GL_BLEND);
 
         glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
         vs.Draw();
-       
+        
         alti.Draw(math.calculateAltitude(passingTime));
         speedindicator.Draw(speedYPositions);
         hi.Draw(circleYPositions, circleRotations);
 
         ui.Draw();
+        
         glDisable(GL_BLEND);
-
+        text.DrawScene();
         ai.Draw(circleYPositions, circleRotations, slipSkidAmount);
         aircraft.Draw();
         
