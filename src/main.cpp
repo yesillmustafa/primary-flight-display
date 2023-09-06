@@ -11,6 +11,7 @@
 #include "verticalspeed.hpp"
 #include "verticalspeedindis.hpp"
 #include "HeadingIndicator.hpp"
+#include "indicator.hpp"
 #include "Mathematics.hpp"
 #include <iostream>
 #include <math.h>
@@ -112,6 +113,7 @@ int main() {
     verticalSpeed vs;
     VSpeed vs_s;
     HeadingIndicator hi;
+    Indicator indicators;
     MATH math;
 
 
@@ -151,6 +153,7 @@ int main() {
 
         ai.Draw(circleYPositions, circleRotations, slipSkidAmount);
         aircraft.Draw();
+        indicators.Draw();
         
         // Pencere ön yüzeyini güncelle
         glfwSwapBuffers(window);
