@@ -28,11 +28,12 @@ float altitudeValue;
 float speedYPositions = 0.0045f;
 
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods) {
+    Landscape landscape;
     if (action == GLFW_PRESS || action == GLFW_REPEAT) {
         switch (key) {
             case GLFW_KEY_W:
                 circleYPositions -= 0.005f;
-
+                
                 break;
             case GLFW_KEY_S:
 
@@ -136,7 +137,6 @@ int main() {
         glClear(GL_COLOR_BUFFER_BIT);
 
         landscape.Draw(circleYPositions, circleRotations);
-
         vs_s.Draw_indicator(math.calculataVSI(circleYPositions,speedYPositions));
         // //blend for texture transparency
         glEnable(GL_BLEND);
@@ -146,8 +146,7 @@ int main() {
        
         alti.Draw(math.calculateAltitude(passingTime));
         speedindicator.Draw(speedYPositions);
-        hi.Draw(circleYPositions, circleRotations);
-
+        hi.Draw(circleYPositions,math.calculateRadyan());
         ui.Draw();
         glDisable(GL_BLEND);
 

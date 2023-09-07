@@ -3,6 +3,7 @@
 
 #include <GLES2/gl2.h>
 #include "shaderProgram.hpp"
+#include <vector>
 
 class Landscape {
 public:
@@ -20,7 +21,6 @@ private:
     ShaderProgram program;
     GLuint vertexBuffer;
     GLuint indexBuffer;
-
     GLuint lines_VertexBuffer;
     GLuint lines_IndexBuffer;
     GLuint lines_IndexCount;
