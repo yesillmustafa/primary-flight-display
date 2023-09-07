@@ -65,7 +65,7 @@ HeadingIndicator::HeadingIndicator() {
 
 }
 
-void HeadingIndicator::Draw(float circleYPositions, float circleRotations) {
+void HeadingIndicator::Draw(float circleRotations) {
     program.use();
     glBindBuffer(GL_ARRAY_BUFFER, vertexBuffer);
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, indexBuffer);
