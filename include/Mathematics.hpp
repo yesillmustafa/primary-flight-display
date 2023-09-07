@@ -9,11 +9,12 @@ class MATH
 public:
     float calculataVSI(float pitchValue,float speedValue );
     float calculateAltitude(float passingTime);
-    float calculateRadyan();
+    float calculateRadyan(float speedValue, float rotationValue);
 private : 
-    float hspeedValue=0.0f;
+    float speedValue = 0.0f;
     float vspeedValue = 0.0f;
     float altitude = 0.0025f;
+    float direction=0.0f;
 };
 
 #endif

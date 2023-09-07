@@ -56,5 +56,6 @@
         "stop_token": "cpp",
         "thread": "cpp",
         "sstream": "cpp"
-    }
+    },
+    "C_Cpp.errorSquiggles": "disabled"
 }

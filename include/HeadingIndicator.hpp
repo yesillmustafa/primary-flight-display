@@ -7,7 +7,7 @@
 class HeadingIndicator {
 public:
     HeadingIndicator();
-    void Draw(float circleYPositions, float circleRotations);
+    void Draw(float circleRotations);
 private:
     ShaderProgram program;
     GLuint vertexBuffer;

@@ -146,7 +146,7 @@ int main() {
        
         alti.Draw(math.calculateAltitude(passingTime));
         speedindicator.Draw(speedYPositions);
-        hi.Draw(circleYPositions,math.calculateRadyan());
+        hi.Draw(math.calculateRadyan(speedYPositions,circleRotations));
         ui.Draw();
         glDisable(GL_BLEND);
 
