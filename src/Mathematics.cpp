@@ -1,7 +1,8 @@
 #include <Mathematics.hpp>
 #include <cmath>
 #include <iostream>
-
+#include <sstream>
+#include <iomanip>
 
 float MATH::calculataVSI(float pitchValue, float speedValue)
 {
@@ -47,10 +48,26 @@ float MATH::calculateAltitude(float passingTime)
     altitude -= vspeedValue;
     // altitude = vspeedValue * passingTime;
 
+      double num = altitude;
+    
+    std::ostringstream ss;
+    ss << std::fixed << num;
+    
+    std::string complicatedNumber = ss.str();
+    
+
+    complicatedNumber = complicatedNumber.substr(0, complicatedNumber.find('.') + 9); 
+    
+    
+   float convFloat = std::stof(complicatedNumber);
     
     std::cout <<"altitude: "<< -1*(((altitude * 0.000025)/2.0)*100000) << std::endl;
 
-    return altitude * 0.00003025;
+
+    if(convFloat>=0.0025f)
+    return  (0.0027);
+    else
+    return(altitude * 0.00003025);
 
 }
 
