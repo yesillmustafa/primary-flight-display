@@ -90,3 +90,8 @@ stb_image is a single-header C library that provides a simple and fast way to pe
 
 #### What is CMake?
 CMake is a tool used for managing software projects; it simplifies the processes of compilation, configuration, and distribution of projects, enabling the creation of seamlessly functional projects on different platforms and compilers.
+
+
+## Contributors
+[Mustafa Yesil](https://github.com/yesillmustafa) <br>
+[Ugur Celik](https://github.com/ugurclikk)
