@@ -12,7 +12,7 @@ The simulator uses the following libraries for OpenGL interactions and rendering
 - [stb image](https://github.com/nothings/stb) (included in the project)
 
 ## Elements
-![PFDScreen](https://github.com/yesillmustafa/primary-flight-display/assets/74787246/863e8ca7-5f0d-4170-90e5-b244944f6a70)
+![PFD](https://github.com/yesillmustafa/primary-flight-display/assets/74787246/7efc8ab9-85a9-45f5-ad1a-ff5b1a4d8588)
 
 ## Features
 
